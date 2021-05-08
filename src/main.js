@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import './plugins/element.js'
 import './assets/css/global.css'
+import './styles/button.less'
 import './assets/fonts/iconfont.css'
 import axios from 'axios'
 // 导入依赖插件
