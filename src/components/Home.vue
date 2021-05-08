@@ -1,6 +1,5 @@
 <template>
   <el-container class="home-comtainer">
-    <!-- 头部区 -->
     <el-header>
       <div>
         <img src="../assets/heima.png" alt />

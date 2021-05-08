@@ -3,7 +3,7 @@
     <div class="login_box">
       <!-- 头像区 -->
       <div class="avatar_box">
-        <img src="../assets/logo.png" alt />
+        <img src="../assets/img/login.jpg" alt />
       </div>
       <!-- 登录表单  :model绑定数据-->
       <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules" label-width="0px" class="login_form">
@@ -60,20 +60,12 @@ export default {
       this.$refs.loginFormRef.resetFields()
     },
     login() {
-      // 方法返回promise 可用async 和 await 来解化promise操作   这是返回的是数据，有axios封装的属性
-      // valid为true发起请求
       this.$refs.loginFormRef.validate(async (valid) => {
         if (!valid) return
-        // 只需要data属性,data是真实的数据
         const { data: res } = await this.$http.post('login', this.loginForm)
-        // 判断状态码
         if (res.meta.status !== 200) return this.$message.error('登录失败')
         this.$message.success('登录成功')
-        // 1.登录成功之后的 token,保存到客户端的 sessionStorage(会话期间)中
-        //  1.1 项目中除了登录之外的其他API接口，必须在登录之后才能访问
-        //  1.2 token 只应在当前网站打开期间生效，所以将token保存在sessionStorage中
-        window.sessionStorage.setItem('token', res.data.token) //token为键，res.data.token为值
-        // 2.通过编程式导航跳转到后台主页，路由地址是 /home
+        window.sessionStorage.setItem('token', res.data.token)
         this.$router.push('/home')
       })
     },
@@ -82,9 +74,14 @@ export default {
 </script>
 
 <style lang="less" scoped>
+
 .login_container {
   background-color: #2b6b6b;
+  background-image: url(../assets/img/login.jpg);
+  background-repeat: no-repeat;
+  background-size: contain;
   height: 100%;
+  opacity: 0.5;
 }
 .login_box {
   width: 450px;
@@ -95,6 +92,7 @@ export default {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  opacity: 1;
   .avatar_box {
     height: 130px;
     width: 130px;
