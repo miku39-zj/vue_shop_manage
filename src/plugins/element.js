@@ -1,7 +1,15 @@
+/*
+ * @Author: your name
+ * @Date: 2021-05-07 19:32:33
+ * @LastEditTime: 2021-05-11 08:28:00
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \vue_shop_manage\src\plugins\element.js
+ */
 import Vue from 'vue'
 import { Button, Form, FormItem, Input,Container,Header,Aside,Row,Col,Switch,Tooltip,Pagination,MessageBox,
     Main,Menu,Submenu,MenuItemGroup,MenuItem,breadcrumb,BreadcrumbItem,Card,Table,TableColumn,
-    Dialog,Tag, Tree,Select,Option,Cascader,Alert,Tabs,TabPane} from 'element-ui'
+    Dialog,Tag, Tree,Select,Option,Cascader,Alert,Tabs,TabPane, Checkbox} from 'element-ui'
 import { Message } from 'element-ui'
 
 
@@ -37,6 +45,7 @@ Vue.use(Cascader)
 Vue.use(Alert)
 Vue.use(Tabs)
 Vue.use(TabPane)
+Vue.use(Checkbox)
 
 
 // 全局挂载

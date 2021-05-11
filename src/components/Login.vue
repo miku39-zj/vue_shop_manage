@@ -27,8 +27,22 @@
           <el-form-item class="btns">
             <el-button class="MyLoginButton" style="width:100%" type="primary" @click="login" size="medium">立即登录
             </el-button>
-            <!-- <el-button class="MyResetButton" type="info" @click="resetLoginForm" size="medium">重置</el-button> -->
           </el-form-item>
+          <el-row>
+            <el-col :span="12">
+              <el-form-item>
+                <el-checkbox v-model="loginForm.remenbMe" style="color:#000">记住我</el-checkbox>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item :style="{ 'text-align': 'right' }">
+                <!-- No logic, you need to deal with it yourself -->
+                <el-button type="text" size="small">
+                  忘记密码？
+                </el-button>
+              </el-form-item>
+            </el-col>
+          </el-row>
         </el-form>
       </div>
     </div>
@@ -39,9 +53,11 @@
   export default {
     data() {
       return {
+        checked: false,
         loginForm: {
           username: 'admin',
           password: '123456',
+          remenbMe:false
         },
         loginFormRules: {
           username: [{
@@ -94,12 +110,12 @@
 
 <style lang="less" scoped>
   .login_container {
-    // background-color: #2b6b6b;
-    background-image: linear-gradient(180deg, rgba(163, 234, 239, 0.77), rgba(200, 163, 239, 0.26));
-    // background-image: url(../assets/img/111.jpg);
+    background-color: #000;
+    // background-image: linear-gradient(180deg, rgba(163, 234, 239, 0.77), rgba(200, 163, 239, 0.26));
+    // background-image: url(../assets/img/222.jpg);
     // background-repeat: no-repeat;
     // clip-path: polygon(0% 0%, 84% 0, 100% 50%, 83% 100%, 0% 100%);
-    background-size: cover;
+    // background-size: cover;
     height: 100%;
 
   }
@@ -115,9 +131,10 @@
   .login_left {
     width: 70%;
     height: 100%;
+
     background-image: url(../assets/img/222.jpg);
     background-repeat: no-repeat;
-    clip-path: polygon(0% 0%, 80% 0, 100% 50%, 83% 100%, 0% 100%);
+    // clip-path: polygon(0% 0%, 80% 0, 100% 50%, 83% 100%, 0% 100%);
     background-size: cover;
     opacity: 0.8;
   }
@@ -128,7 +145,7 @@
 
     .login_box {
       width: 400px;
-      height: 280px;
+      height: 400px;
       // background-color: #fff;
       background: hsla(0, 0%, 100%, .3);
       border-radius: 3px;
