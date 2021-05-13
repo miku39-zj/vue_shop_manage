@@ -1,3 +1,7 @@
+/*
+ * @Description: 
+ * @Date: 2021-05-07 19:32:33
+ */
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -6,6 +10,7 @@ import './assets/css/global.css'
 import './styles/button.less'
 import './assets/fonts/iconfont.css'
 import axios from 'axios'
+import './icons'
 // 导入依赖插件
 import TreeTable from 'vue-table-with-tree-grid'
 

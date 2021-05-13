@@ -1,11 +1,4 @@
-/*
- * @Author: your name
- * @Date: 2021-05-07 19:32:33
- * @LastEditTime: 2021-05-11 21:03:42
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \vue_shop_manage\src\plugins\element.js
- */
+
 import Vue from 'vue'
 import { Button, Form, FormItem, Input,Container,Header,Aside,Row,Col,Switch,Tooltip,Pagination,MessageBox,
     Main,Menu,Submenu,MenuItemGroup,MenuItem,breadcrumb,BreadcrumbItem,Card,Table,TableColumn,
