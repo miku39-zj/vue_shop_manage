@@ -1,5 +1,8 @@
 <template>
   <div class="login_container">
+    <div class="rightTop">
+      <svg-icon icon-class='cloud' className="cloud-icon" />
+    </div>
     <div class="login_box">
       <!-- 头像区 -->
       <!-- <div class="avatar_box">
@@ -41,15 +44,33 @@
         <div class="divider">
           <span class="text">其他登录</span>
         </div>
-        <svg-icon icon-class='view' className="ebmsIcon view-icon" />
+        <el-form-item :style="{ 'text-align': 'center' }">
+          <el-button class="iconBox" type="text" @click="otherLogin">
+            <svg-icon icon-class='github' className="myIcon github-icon" />
+          </el-button>
+          <el-button class="iconBox" type="text" @click="otherLogin">
+            <svg-icon icon-class='facebook' className="myIcon facebook-icon" />
+          </el-button>
+          <el-button class="iconBox" type="text" @click="otherLogin">
+            <svg-icon icon-class='twitter' className="myIcon twitter-icon" />
+          </el-button>
+          <el-button class="iconBox" type="text" @click="otherLogin">
+            <svg-icon icon-class='wechart' className="myIcon wechart-icon" />
+          </el-button>
+        </el-form-item>
         <!-- <el-divider class="otherLogin">其它登录</el-divider> -->
       </el-form>
     </div>
+    <otherLogin ref="otherLogin"></otherLogin>
   </div>
 </template>
 
 <script>
+  import otherLogin from "./LoginChild/otherLogin"
   export default {
+    components: {
+      otherLogin
+    },
     data() {
       return {
         checked: false,
@@ -87,10 +108,7 @@
       }
     },
     methods: {
-      // 点击重置
-      resetLoginForm() {
-        this.$refs.loginFormRef.resetFields()
-      },
+
       login() {
         this.$refs.loginFormRef.validate(async (valid) => {
           if (!valid) return
@@ -103,15 +121,18 @@
           this.$router.push('/home')
         })
       },
+      otherLogin() {
+        this.$refs.otherLogin.dialogVisible = true
+      },
     },
   }
 </script>
 
 <style lang="less" scoped>
   .divider {
-    border-top: 0px solid rgba(0, 0, 0, .5);
+    border-top: 0px solid rgba(0, 0, 0, .4);
     box-sizing: border-box;
-    color: rgba(0, 0, 0, .65);
+    color: rgba(0, 0, 0, .5);
     width: 100%;
 
     .text {
@@ -121,7 +142,9 @@
       text-align: center;
       transform: translate(0, 25%);
     }
+
   }
+
 
   .divider::before {
     content: "";
@@ -141,23 +164,26 @@
     width: 35%;
   }
 
-
-
-
   .login_container {
     // background-color: #000;
-    background-image: url(../assets/img/222.jpg);
+    background-image: url(../assets/img/32.jpg);
     background-repeat: no-repeat;
     // clip-path: polygon(0% 0%, 84% 0, 100% 50%, 83% 100%, 0% 100%);
     background-size: cover;
+    width: 100%;
     height: 100%;
 
-    .view-icon {
-      fill:#000;
-      width: 30px;
-      width: 30px;
-    }
 
+  }
+
+  .rightTop {
+    float: right;
+    margin: 15px 30px 0 0;
+
+    .cloud-icon {
+      width: 3em;
+      height: 3em;
+    }
   }
 
   .login-box-title {
@@ -174,12 +200,21 @@
     width: 400px;
     height: 400px;
     // background-color: #fff;
-    background: hsla(0, 0%, 100%, .5);
+    background: hsla(0, 0%, 100%, .7);
     border-radius: 3px;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+
+    .myIcon {
+      width: 1.8em;
+      height: 1.8em;
+    }
+
+    .iconBox {
+      margin: 0.5em 1em;
+    }
 
     .avatar_box {
       height: 120px;

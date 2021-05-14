@@ -16,16 +16,19 @@ const IS_DEV = ["development"].includes(process.env.NODE_ENV);
 
 module.exports = {
   lintOnSave: false,
+  devServer: {
+    hot: false
+  },
   chainWebpack: config => {
     // use svg
     config.module
       .rule("svg")
-      .exclude.add(resolve("src/icons")) // url-loader不处理
+      .exclude.add(resolve("src/icons/svg")) // url-loader不处理
       .end();
     config.module
       .rule("icons")
       .test(/\.svg$/)
-      .include.add(resolve("src/icons"))
+      .include.add(resolve("src/icons/svg"))
       .end()
       .use("svg-sprite-loader")
       .loader("svg-sprite-loader")

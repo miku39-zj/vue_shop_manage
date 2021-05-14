@@ -5,6 +5,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import ElementUI from 'element-ui';
 import './plugins/element.js'
 import './assets/css/global.css'
 import './styles/button.less'
@@ -14,6 +15,8 @@ import './icons'
 // 导入依赖插件
 import TreeTable from 'vue-table-with-tree-grid'
 
+
+Vue.use(ElementUI)
 
 // 配置请求根路径
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
