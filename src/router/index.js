@@ -4,27 +4,44 @@
  */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import Login from '../components/Login.vue'
-// import Home from '../components/Home.vue'
-// import Welcome from '../components/Welcome.vue'
-// import Users from '../components/user/Users.vue'
-// import Rights from '../components/power/Rights.vue'
-// import Roles from '../components/power/Roles.vue'
-// import Cate from '../components/goods/Cate.vue'
-// import Params from '../components/goods/Params.vue'
+
+import Home from '../components/Home.vue'
 
 Vue.use(VueRouter)
 
-const routes = [{
+// 通用页面, 这里的配置不需要权限
+export const constRouter = [{
     path: '/login',
-    component:  () => import('@/components/Login'),
-    hidden: true
+    component: () => import('@/components/Login'),
+    hidden: true //导航菜单忽略选项
   },
   {
-    path: '/',
-    redirect: '/login'
+    path: '',
+    component: Home,
+    redirect: '/home',
+    hidden: true,
   },
   {
+    path: '/home',
+    component: Home,
+    name: 'home',
+    meta: {
+      title: "首页", //导航菜单项标题
+      icon: 'el-icon-s-home' //导航菜单图标
+    },
+    children: [{
+      path: '',
+      component: () => import('@/components/Welcome.vue'),
+      name: 'welcome',
+      meta: {
+        title: "工作台",
+        icon: 'el-icon-s-home',
+      }
+    }]
+  }
+]
+
+const dynamicRoutes = [{
     path: '/home',
     component: () => import('@/components/Home.vue'),
     redirect: '/welcome',
@@ -58,7 +75,7 @@ const routes = [{
 ]
 
 const router = new VueRouter({
-  routes
+  routes: dynamicRoutes
 })
 
 // 挂载路由导航守卫

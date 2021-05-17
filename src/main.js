@@ -10,6 +10,8 @@ import './plugins/element.js'
 import './assets/css/global.css'
 import './styles/button.less'
 import './assets/fonts/iconfont.css'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 import axios from 'axios'
 import './icons'
 // 导入依赖插件
