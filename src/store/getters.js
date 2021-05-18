@@ -1,6 +1,10 @@
+/*
+ * @Description: 
+ * @Date: 2021-05-17 17:36:49
+ */
 
  // 定义全局getters 方便访问user 模块的roles
 const getters = {
-  permission_routes: state => state.permission.routes
+  common_routes: state => state.common.routes
 }
 export default getters

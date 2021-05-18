@@ -5,15 +5,17 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import ElementUI from 'element-ui';
+import store from './store'
+
+import ElementUI from 'element-ui'
 import './plugins/element.js'
 import './assets/css/global.css'
 import './styles/button.less'
 import './assets/fonts/iconfont.css'
-import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import axios from 'axios'
 import './icons'
+import './router/permission'
 // 导入依赖插件
 import TreeTable from 'vue-table-with-tree-grid'
 
@@ -37,6 +39,7 @@ Vue.component('tree-table', TreeTable)
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')
 

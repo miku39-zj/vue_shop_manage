@@ -5,9 +5,9 @@
     </div>
     <div class="login_box">
       <!-- 头像区 -->
-      <!-- <div class="avatar_box">
-          A
-        </div> -->
+      <!-- <div :class="sex ? 'boybox' : 'girlbox'" >
+        A
+      </div> -->
       <div class="login-box-title">
         后台管理系统
       </div>
@@ -73,6 +73,7 @@
     },
     data() {
       return {
+        sex:1,
         checked: false,
         loginForm: {
           username: 'admin',
@@ -112,12 +113,12 @@
       login() {
         this.$refs.loginFormRef.validate(async (valid) => {
           if (!valid) return
-          const {
-            data: res
-          } = await this.$http.post('login', this.loginForm)
-          if (res.meta.status !== 200) return this.$message.error('登录失败')
-          this.$message.success('登录成功')
-          window.sessionStorage.setItem('token', res.data.token)
+          // const {
+          //   data: res
+          // } = await this.$http.post('login', this.loginForm)
+          // if (res.meta.status !== 200) return this.$message.error('登录失败')
+          // this.$message.success('登录成功')
+          // window.sessionStorage.setItem('token', res.data.token)
           this.$router.push('/home')
         })
       },
@@ -216,23 +217,37 @@
       margin: 0.5em 1em;
     }
 
-    .avatar_box {
-      height: 120px;
-      width: 120px;
+    .boybox {
+      height: 100px;
+      width: 100px;
       // border: 1px solid #eee;
       border-radius: 50%;
       padding: 10px;
-      box-shadow: inset -50px 50px 100px #666666,
-        inset 50px -50px 100px #ffffff;
       position: absolute;
       left: 50%;
       transform: translate(-50%, -100%);
-      background-color: #fff;
+      background-color: skyblue;
       font-size: 100px;
-      color: red;
+      color: #fff;
       // margin: 30px 800px;
       text-align: center;
-      text-shadow: 0 0 4px white, 0 -5px 4px #ff3, 2px -10px 6px #fd3, -2px -15px 11px #f80, 2px -25px 18px #f20;
+      // text-shadow: 0 0 4px white, 0 -5px 4px #ff3, 2px -10px 6px #fd3, -2px -15px 11px #f80, 2px -25px 18px #f20;
+    }
+    .girlbox {
+      height: 100px;
+      width: 100px;
+      // border: 1px solid #eee;
+      border-radius: 50%;
+      padding: 10px;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -100%);
+      background-color: pink;
+      font-size: 100px;
+      color: #fff;
+      // margin: 30px 800px;
+      text-align: center;
+      // text-shadow: 0 0 4px white, 0 -5px 4px #ff3, 2px -10px 6px #fd3, -2px -15px 11px #f80, 2px -25px 18px #f20;
     }
   }
 

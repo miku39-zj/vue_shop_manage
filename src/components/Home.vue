@@ -1,6 +1,8 @@
 <template>
   <div class="app-Layout">
+
     <el-container class="home-comtainer">
+
       <el-aside :width="isCollapse ? '64px' : '200px'" class="home-sider">
         <div class="siderBox">
           <div class="siderTitle">后台管理系统</div>
@@ -8,20 +10,11 @@
             <el-menu class="siderMenu" background-color="#333744" text-color="#fff" active-text-color="#ffffff"
               :unique-opened="false" :collapse="isCollapse" :collapse-transition="false" router
               :default-active="activePath">
-              <!-- 一级菜单 -->
-              <el-submenu :index="item.id+' '" v-for="item in menulist" :key="item.id">
-                <template v-slot:title>
-                  <i :class="iconsObj[item.id]"></i>
-                  <span>{{item.authName}}</span>
-                </template>
-                <el-menu-item :index="'/'+subItem.path" v-for="subItem in item.children" :key="subItem.id"
-                  @click="saveNavState('/'+subItem.path)" style="min-width: none;">
-                  <template slot="title">
-                    <i class="el-icon-menu"></i>
-                    <span>{{subItem.authName}}</span>
-                  </template>
-                </el-menu-item>
-              </el-submenu>
+              <div v-for=" item in common_routes" :key="item.path">
+                <div v-if="!item.hidden">
+
+                </div>
+              </div>
             </el-menu>
           </div>
         </div>
@@ -43,17 +36,22 @@
           <router-view></router-view>
         </el-main>
       </el-container>
+      
     </el-container>
   </div>
 </template>
 
 <script>
+  import {
+    mapGetters
+  } from "vuex";
   import BreadCrumb from './BreadCrumb/BreadCrumb'
   export default {
     components: {
       BreadCrumb
     },
     computed: {
+      ...mapGetters(["common_routes"]),
       activeMenu() {
         const route = this.$route;
         const {
@@ -61,7 +59,6 @@
           path
         } = route;
         // 默认激活项
-        console.log(route,111);
         if (meta.activeMenu) {
           return meta.activeMenu;
         }
@@ -72,101 +69,47 @@
       return {
         toggleActive: false,
         menulist: [],
-        iconsObj: {
-          '125': 'iconfont icon-user',
-          '103': 'iconfont icon-tijikongjian',
-          '101': 'iconfont icon-shangpin',
-          '102': 'iconfont icon-danju',
-          '145': 'iconfont icon-baobiao'
-        },
         isCollapse: false,
         // 被激活的链接地址
         activePath: '',
-        menulist: [{
-          id: 125,
-          authName: '用户管理',
-          path: 'users',
-          children: [{
-            id: 110,
-            authName: '用户列表',
-            path: 'users',
-            children: [],
-            order: null
-          }],
-          order: 1
-        }, {
-          id: 103,
-          authName: '权限管理',
-          path: 'rights',
-          children: [{
-            id: 111,
-            authName: '角色列表',
-            path: 'roles',
-            children: [],
-            order: null
-          }, {
-            id: 112,
-            authName: '权限列表',
-            path: 'rights',
-            children: [],
-            order: null
-          }],
-          order: 2
-        }, {
-          id: 101,
-          authName: '商品管理',
-          path: 'goods',
-          children: [{
-            id: 104,
-            authName: '商品列表',
-            path: 'goods',
-            children: [],
-            order: 1
-          }, {
-            id: 115,
-            authName: '分类参数',
-            path: 'params',
-            children: [],
-            order: 2
-          }, {
-            id: 121,
-            authName: '商品分类',
-            path: 'categories',
-            children: [],
-            order: 3
-          }],
-          order: 3
-        }, {
-          id: 102,
-          authName: '订单管理',
-          path: 'orders',
-          children: [{
-            id: 107,
-            authName: '订单列表',
-            path: 'orders',
-            children: [],
-            order: null
-          }],
-          order: 4
-        }, {
-          id: 145,
-          authName: '数据统计',
-          path: 'reports',
-          children: [{
-            id: 146,
-            authName: '数据报表',
-            path: 'reports',
-            children: [],
-            order: null
-          }],
-          order: 5
-        }],
+        menulist: [],
       }
     },
     mounted() {
+      console.log(this.common_routes,"common_routes");
       this.activePath = window.sessionStorage.getItem('activePath')
     },
     methods: {
+      hasOneShowingChild(children = [], parent) {
+        const showingChildren = children.filter(item => {
+          if (item.hidden) {
+            return false
+          } else {
+            // 如果只有一个子菜单时设置
+            this.onlyOneChild = item
+            return true
+          }
+        })
+        // 当只有一个子路由,子路由默认展示
+        if (showingChildren.length === 1) {
+          return true
+        }
+        // 没有子路由则显示父路由
+        if (showingChildren.length === 0) {
+          this.onlyOneChild = {
+            ...parent,
+            path: '',
+            noShowingChildren: true
+          }
+          return true
+        }
+        //  console.log(this.onlyOneChild)
+        return false
+      },
+      resolvePath(routePath) {
+        return path.resolve(this.basePath, routePath)
+      },
+
       logout() {
         // 清空token
         window.sessionStorage.clear()
@@ -180,7 +123,6 @@
       },
       // 保存链接的激活状态
       saveNavState(activePath) {
-        console.log(this.activeMenu,132132132);
         window.sessionStorage.setItem('activePath', activePath)
         this.activePath = activePath
       },

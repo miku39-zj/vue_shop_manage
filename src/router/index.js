@@ -2,6 +2,10 @@
  * @Description: 
  * @Date: 2021-05-07 19:32:33
  */
+/*
+ * @Description: 
+ * @Date: 2021-05-07 19:32:33
+ */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -41,53 +45,69 @@ export const constRouter = [{
   }
 ]
 
-const dynamicRoutes = [{
-    path: '/home',
-    component: () => import('@/components/Home.vue'),
-    redirect: '/welcome',
-    children: [{
-        path: '/welcome',
-        component: () => import('@/components/Welcome.vue')
-      },
-      {
-        path: '/users',
-        component: () => import('@/components/user/Users.vue')
-      },
-      {
-        path: '/rights',
-        component: () => import('@/components/power/Rights.vue')
-      },
-      {
-        path: '/roles',
-        component: () => import('@/components/power/Roles.vue')
-      },
-      {
-        path: '/categories',
-        component: () => import('@/components/goods/Cate.vue')
-      },
-      {
-        path: '/params',
-        component: () => import('@/components/goods/Params.vue')
-      }
-    ]
-  }
+export const dynamicRoutes = [
+  // {
+  //   path: '/users',
+  //   component: Home,
+  //   redirect: '/users/userList',
+  //   meta: {
+  //     title: "用户管理",
+  //     icon: "iconfont icon-user",
+  //     hidden: false
+  //   },
+  //   children: [{
+  //     path: '/users/userList',
+  //     component: () => import('@/components/user/Users.vue'),
+  //     name: 'userList',
+  //     meta: {
+  //       title: "用户列表",
+  //       icon: 'el-icon-tickets',
+  //       hidden: false,
+  //     }
+  //   }]
+  // },
+  // {
+  //   path: '/rights',
+  //   component: Home,
+  //   redirect: '/rights/index',
+  //   meta: {
+  //     title: "权限管理",
+  //     icon: "iconfont icon-user",
+  //     hidden: false
+  //   },
+  //   children: [
+  //     {
+  //     path: 'roles',
+  //     component: () => import('@/components/power/Rights.vue'),
+  //     name: 'rightsroles',
+  //     meta: {
+  //       title: "角色列表",
+  //       icon: 'el-icon-tickets',
+  //       hidden: false,
+  //     }
+  //   },
+  //   {
+  //     path: 'Rights',
+  //     component: () => import('@/components/power/Rights.vue'),
+  //     name: 'rightsRights',
+  //     meta: {
+  //       title: "权限列表",
+  //       icon: 'el-icon-tickets',
+  //       hidden: false,
+  //     }
+  //   },
 
+  //  ]
+  // }
 ]
 
 const router = new VueRouter({
-  routes: dynamicRoutes
+  mode: 'hash',
+  base: process.env.BASE_URL,
+  routes: constRouter
 })
 
-// 挂载路由导航守卫
-router.beforeEach((to, from, next) => {
-  // to 将要跳转的路径  from表示从哪个路径跳转来   next是一个函数，表示放行 next() 放行  next('/login)强制跳转
-  if (to.path == '/login') return next();
-  // 获取token
-  const tokenStr = window.sessionStorage.getItem('token');
 
-  if (!tokenStr) return next('/login');
-  next();
-})
 
 
 export default router
