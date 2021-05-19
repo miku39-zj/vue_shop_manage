@@ -3,18 +3,18 @@
 
     <el-container class="home-comtainer">
 
-      <el-aside :width="isCollapse ? '64px' : '180px'" class="home-sider">
+      <el-aside :width="isCollapse ? '65px' : '180px'" class="home-sider">
         <div class="siderBox">
           <div class="siderTitle">
             <svg-icon icon-class='backstage' className="backstage-icon" />
             <span>后台管理系统</span>
           </div>
           <div class="siderMain">
-            <el-menu class="siderMenu" background-color="#333744" text-color="#fff" active-text-color="#ffffff"
+            <el-menu class="siderMenu" background-color="#333744" text-color="#ffffff" active-text-color="#ffffff"
               :unique-opened="false" :collapse="isCollapse" :collapse-transition="false" router
               :default-active="activePath">
-              <menuItem v-for="route in common_routes" :key="route.path" :item="route" :base-path="route.path">
-              </menuItem>
+              <MenuItem v-for="route in common_routes" :key="route.path" :item="route" :base-path="route.path">
+              </MenuItem>
             </el-menu>
           </div>
         </div>
@@ -29,7 +29,7 @@
               </div>
               <BreadCrumb />
             </div>
-            <headerRight />
+            <HeaderRight />
           </div>
         </el-header>
         <el-main class="home-main">
@@ -46,14 +46,14 @@
   import {
     mapGetters
   } from "vuex";
-  import headerRight from './headerRight/headerRight'
-  import menuItem from './MenuItem/menuItem'
+  import HeaderRight from './headerRight/headerRight'
+  import MenuItem from './MenuItem/menuItem'
   import BreadCrumb from './BreadCrumb/BreadCrumb'
   export default {
     components: {
       BreadCrumb,
-      menuItem,
-      headerRight
+      MenuItem,
+      HeaderRight
     },
     computed: {
       ...mapGetters(["common_routes"]),
@@ -141,7 +141,7 @@
       overflow: hidden;
 
       .backstage-icon {
-        fill: chartreuse;
+        fill: #3E64FF;
         margin: 0 10px 0 25px;
       }
     }
@@ -161,7 +161,8 @@
 
 
   .home-header {
-    background-image: linear-gradient(to right, #ffffff, #ffffff);
+    background: linear-gradient(125deg, #ECFCFF 0%, #ECFCFF 40%, #B2FCFF calc(40% + 1px), #B2FCFF 60%, #5EDFFF calc(60% + 1px), #5EDFFF 72%, #3E64FF calc(72% + 1px), #3E64FF 100%);
+    // background-image: linear-gradient(to right, #ffffff, #ffffff);
     margin: 0;
     padding: 0;
     border-bottom: 1px solid #dcdfe6;
