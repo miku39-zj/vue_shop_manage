@@ -3,18 +3,18 @@
 
     <el-container class="home-comtainer">
 
-      <el-aside :width="isCollapse ? '64px' : '200px'" class="home-sider">
+      <el-aside :width="isCollapse ? '64px' : '180px'" class="home-sider">
         <div class="siderBox">
-          <div class="siderTitle">后台管理系统</div>
+          <div class="siderTitle">
+            <svg-icon icon-class='backstage' className="backstage-icon" />
+            <span>后台管理系统</span>
+          </div>
           <div class="siderMain">
             <el-menu class="siderMenu" background-color="#333744" text-color="#fff" active-text-color="#ffffff"
               :unique-opened="false" :collapse="isCollapse" :collapse-transition="false" router
               :default-active="activePath">
-              <div v-for=" item in common_routes" :key="item.path">
-                <div v-if="!item.hidden">
-
-                </div>
-              </div>
+              <menuItem v-for="route in common_routes" :key="route.path" :item="route" :base-path="route.path">
+              </menuItem>
             </el-menu>
           </div>
         </div>
@@ -29,6 +29,7 @@
               </div>
               <BreadCrumb />
             </div>
+            <headerRight />
           </div>
         </el-header>
         <el-main class="home-main">
@@ -36,7 +37,7 @@
           <router-view></router-view>
         </el-main>
       </el-container>
-      
+
     </el-container>
   </div>
 </template>
@@ -45,10 +46,14 @@
   import {
     mapGetters
   } from "vuex";
+  import headerRight from './headerRight/headerRight'
+  import menuItem from './MenuItem/menuItem'
   import BreadCrumb from './BreadCrumb/BreadCrumb'
   export default {
     components: {
-      BreadCrumb
+      BreadCrumb,
+      menuItem,
+      headerRight
     },
     computed: {
       ...mapGetters(["common_routes"]),
@@ -76,39 +81,9 @@
       }
     },
     mounted() {
-      console.log(this.common_routes,"common_routes");
       this.activePath = window.sessionStorage.getItem('activePath')
     },
     methods: {
-      hasOneShowingChild(children = [], parent) {
-        const showingChildren = children.filter(item => {
-          if (item.hidden) {
-            return false
-          } else {
-            // 如果只有一个子菜单时设置
-            this.onlyOneChild = item
-            return true
-          }
-        })
-        // 当只有一个子路由,子路由默认展示
-        if (showingChildren.length === 1) {
-          return true
-        }
-        // 没有子路由则显示父路由
-        if (showingChildren.length === 0) {
-          this.onlyOneChild = {
-            ...parent,
-            path: '',
-            noShowingChildren: true
-          }
-          return true
-        }
-        //  console.log(this.onlyOneChild)
-        return false
-      },
-      resolvePath(routePath) {
-        return path.resolve(this.basePath, routePath)
-      },
 
       logout() {
         // 清空token
@@ -153,15 +128,22 @@
       height: 100%;
     }
 
+
     .siderTitle {
       width: 100%;
       height: 50px;
       border-bottom: 1px solid #dcdfe6;
       color: #ffffff;
       box-sizing: border-box;
-      text-align: center;
+      text-align: left;
       line-height: 50px;
       font-size: 16px;
+      overflow: hidden;
+
+      .backstage-icon {
+        fill: chartreuse;
+        margin: 0 10px 0 25px;
+      }
     }
 
     .siderMain {
@@ -199,6 +181,7 @@
     .leftBox {
       transition: all 0.5s;
       transform-origin: center center;
+      line-height: 50px;
       width: 20px;
       height: 100%;
       margin-right: 15px;

@@ -38,7 +38,7 @@ export const constRouter = [{
       component: () => import('@/components/Welcome.vue'),
       name: 'welcome',
       meta: {
-        title: "工作台",
+        title: "欢迎页",
         icon: 'el-icon-s-home',
       }
     }]
@@ -46,59 +46,7 @@ export const constRouter = [{
 ]
 
 export const dynamicRoutes = [
-  // {
-  //   path: '/users',
-  //   component: Home,
-  //   redirect: '/users/userList',
-  //   meta: {
-  //     title: "用户管理",
-  //     icon: "iconfont icon-user",
-  //     hidden: false
-  //   },
-  //   children: [{
-  //     path: '/users/userList',
-  //     component: () => import('@/components/user/Users.vue'),
-  //     name: 'userList',
-  //     meta: {
-  //       title: "用户列表",
-  //       icon: 'el-icon-tickets',
-  //       hidden: false,
-  //     }
-  //   }]
-  // },
-  // {
-  //   path: '/rights',
-  //   component: Home,
-  //   redirect: '/rights/index',
-  //   meta: {
-  //     title: "权限管理",
-  //     icon: "iconfont icon-user",
-  //     hidden: false
-  //   },
-  //   children: [
-  //     {
-  //     path: 'roles',
-  //     component: () => import('@/components/power/Rights.vue'),
-  //     name: 'rightsroles',
-  //     meta: {
-  //       title: "角色列表",
-  //       icon: 'el-icon-tickets',
-  //       hidden: false,
-  //     }
-  //   },
-  //   {
-  //     path: 'Rights',
-  //     component: () => import('@/components/power/Rights.vue'),
-  //     name: 'rightsRights',
-  //     meta: {
-  //       title: "权限列表",
-  //       icon: 'el-icon-tickets',
-  //       hidden: false,
-  //     }
-  //   },
 
-  //  ]
-  // }
 ]
 
 const router = new VueRouter({
