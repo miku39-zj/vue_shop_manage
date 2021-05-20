@@ -12,7 +12,7 @@
           <div class="siderMain">
             <el-menu class="siderMenu" background-color="#333744" text-color="#ffffff" active-text-color="#ffffff"
               :unique-opened="false" :collapse="isCollapse" :collapse-transition="false" router
-              :default-active="activePath">
+              :default-active="activeMenu">
               <MenuItem v-for="route in common_routes" :key="route.path" :item="route" :base-path="route.path">
               </MenuItem>
             </el-menu>
@@ -32,9 +32,17 @@
             <HeaderRight />
           </div>
         </el-header>
+
         <el-main class="home-main">
+          <TagsViews />
           <!-- 路由占位符 -->
-          <router-view></router-view>
+          <router-view v-slot="{ Component }">
+            <transition name="move" mode="out-in">
+              <keep-alive :include="tagList">
+                <component :is="Component" />
+              </keep-alive>
+            </transition>
+          </router-view>
         </el-main>
       </el-container>
 
@@ -46,6 +54,7 @@
   import {
     mapGetters
   } from "vuex";
+  import TagsViews from './TagsViews/TagsViews'
   import HeaderRight from './headerRight/headerRight'
   import MenuItem from './MenuItem/menuItem'
   import BreadCrumb from './BreadCrumb/BreadCrumb'
@@ -53,7 +62,8 @@
     components: {
       BreadCrumb,
       MenuItem,
-      HeaderRight
+      HeaderRight,
+      TagsViews
     },
     computed: {
       ...mapGetters(["common_routes"]),
@@ -63,7 +73,7 @@
           meta,
           path
         } = route;
-        // 默认激活项
+        console.log(route, "route123");
         if (meta.activeMenu) {
           return meta.activeMenu;
         }
@@ -76,13 +86,10 @@
         menulist: [],
         isCollapse: false,
         // 被激活的链接地址
-        activePath: '',
         menulist: [],
       }
     },
-    mounted() {
-      this.activePath = window.sessionStorage.getItem('activePath')
-    },
+    mounted() {},
     methods: {
 
       logout() {
@@ -95,17 +102,17 @@
       toggleCollapse() {
         this.toggleActive = !this.toggleActive
         this.isCollapse = !this.isCollapse
-      },
-      // 保存链接的激活状态
-      saveNavState(activePath) {
-        window.sessionStorage.setItem('activePath', activePath)
-        this.activePath = activePath
-      },
+      }
     },
   }
 </script>
 
 <style lang="less" scoped>
+  //去掉下划线
+  /deep/.router-link-active {
+    text-decoration: none !important;
+  }
+
   .app-Layout {
     width: 100%;
     height: 100%;
@@ -207,7 +214,7 @@
     overflow: hidden !important;
   }
 
-  .main-container {
+  .home-main {
     width: 100%;
     height: 100%;
     background-color: #eaedf1;

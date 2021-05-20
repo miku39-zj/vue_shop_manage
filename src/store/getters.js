@@ -5,6 +5,7 @@
 
  // 定义全局getters 方便访问user 模块的roles
 const getters = {
-  common_routes: state => state.common.routes
+  common_routes: state => state.common.routes,
+  tagList: state => state.common.tagList
 }
 export default getters
