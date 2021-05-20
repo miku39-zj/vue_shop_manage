@@ -2,7 +2,7 @@
   <div v-if="!item.hidden">
     <template v-if="checkOneChild(item.children,item)">
       <router-link v-if="onlyOneChild.meta && !onlyOneChild.meta.hidden" :to="resolvePath(onlyOneChild.path)">
-        <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown' : isNest }">
+        <el-menu-item :index="resolvePath(onlyOneChild.path,2)" :class="{'submenu-title-noDropdown' : isNest }">
           <i :class="onlyOneChild.meta.icon || (item.meta && item.meta.icon)" style="color: #ffffff" />
           <span slot='title'>{{onlyOneChild.meta.title}}</span>
         </el-menu-item>
@@ -14,7 +14,7 @@
         <span>{{item.meta.title}}</span>
       </template>
       <menuItem v-for="child in item.children" :key="child.path" :is-nest='true' :item='child'
-        :base-path="resolvePath(child.path)"/>
+        :base-path="resolvePath(child.path)" />
     </el-submenu>
   </div>
 </template>
@@ -71,14 +71,18 @@
         }
         return false
       },
-      resolvePath(routePath) {
+      resolvePath(routePath,val) {
         return path.resolve(this.basePath, routePath) //解析成绝对路径
       }
     }
   }
 </script>
 
-<style>
+<style lang="less" scoped>
+  a {
+    text-decoration: none !important;
+  }
+
   .el-menu-item.is-active {
     background: #1A86EE !important;
   }

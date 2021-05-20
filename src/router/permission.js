@@ -22,10 +22,14 @@ NProgress.configure({
 
 router.beforeEach(async (to, from, next) => {
   NProgress.start()
-  if (to.path == '/login') return next();
-  
+  if (to.path == '/login') {
+    return next();
+  }
+
+  if (store.getters.common_routes.length > 0) {
+    return next()
+  }
   const accessRoutes = await store.dispatch('generateRoutes')
-  // 添加这些路由至路由器
   next()
 })
 

@@ -40,7 +40,7 @@
     methods: {
       isActive(path) {
         console.log(path === this.$route.fullPath);
-        return true;
+        return path === this.$route.fullPath;
       },
       closeTags() {
 

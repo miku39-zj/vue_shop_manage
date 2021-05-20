@@ -13,6 +13,15 @@ import Home from '../components/Home.vue'
 
 Vue.use(VueRouter)
 
+const originalPush = VueRouter.prototype.push
+
+VueRouter.prototype.push = function push(location) {
+
+  return originalPush.call(this, location).catch(err => err)
+
+}
+
+
 // 通用页面, 这里的配置不需要权限
 export const constRouter = [{
     path: '/login',
@@ -45,9 +54,37 @@ export const constRouter = [{
   }
 ]
 
-export const dynamicRoutes = [
-
-]
+export const dynamicRoutes = [{
+  path: '/User',
+  component: Home,
+  redirect: 'User/userlist',
+  meta: {
+    title: "用户列表",
+    icon: 'el-icon-s-marketing',
+    hidden: false
+  },
+  children: [{
+      path: 'userlist',
+      component: () => import('@/views/User/userList.vue'),
+      name: 'userlist',
+      meta: {
+        title: "用户列表",
+        icon: 'el-icon-tickets',
+        hidden: false,
+      }
+    },
+    {
+      path: 'user1',
+      component: () => import('@/views/User/userList.vue'),
+      name: 'user1',
+      meta: {
+        title: "用户列表",
+        icon: 'el-icon-tickets',
+        hidden: false,
+      }
+    }
+  ]
+}]
 
 const router = new VueRouter({
   mode: 'hash',

@@ -27,8 +27,10 @@
               <div class="leftBox" @click="toggleCollapse" :class="toggleActive ? 'toggleLeftBox' : ''">
                 <svg-icon icon-class='fold' className="fold-icon" />
               </div>
+              <!-- 面包屑 -->
               <BreadCrumb />
             </div>
+
             <HeaderRight />
           </div>
         </el-header>
@@ -36,13 +38,18 @@
         <el-main class="home-main">
           <TagsViews />
           <!-- 路由占位符 -->
-          <router-view v-slot="{ Component }">
+          <div class="main-views">
+            <transition name="move" mode="out-in">
+              <router-view />
+            </transition>
+          </div>
+          <!-- <router-view v-slot="{ Component }">
             <transition name="move" mode="out-in">
               <keep-alive :include="tagList">
                 <component :is="Component" />
               </keep-alive>
             </transition>
-          </router-view>
+          </router-view> -->
         </el-main>
       </el-container>
 
@@ -89,15 +96,11 @@
         menulist: [],
       }
     },
-    mounted() {},
+    mounted() {
+      console.log(this.common_routes);
+    },
     methods: {
 
-      logout() {
-        // 清空token
-        window.sessionStorage.clear()
-        // 跳转登录界面
-        this.$router.push('/login')
-      },
       // 点击按钮 切换菜单折叠
       toggleCollapse() {
         this.toggleActive = !this.toggleActive
@@ -217,13 +220,42 @@
   .home-main {
     width: 100%;
     height: 100%;
-    background-color: #eaedf1;
-    padding: 0 !important;
+    // background-color: #eaedf1;
+    padding: 0px !important;
   }
 
-
+  .main-views{
+    padding: 10px 10px 0 10px;
+    width: 100%;
+    box-sizing: border-box;
+    height: calc(100% - 35px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    -ms-overflow-style: none; 
+    overflow: '-moz-scrollbars-none';
+    scrollbar-width: none;  /*  火狐   */
+    background: #F5F7F9;
+    background-image: linear-gradient(to right,#ffffff, #ffffff)
+}
 
   .iconfont {
     margin-right: 10px;
+  }
+
+  .move-enter,
+  .move-leave-to {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  .move-enter-to,
+  .move-leave {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  .move-enter-active,
+  .move-leave-active {
+    transition: all 0.5s;
   }
 </style>

@@ -22,3 +22,17 @@ body,
 .el-pagination{
     margin-top: 15px;
 }
+
+.el-dialog__header {
+  padding: 10px 20px !important;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 20px;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.el-dialog__body {
+  padding: 10px 20px !important;
+}
