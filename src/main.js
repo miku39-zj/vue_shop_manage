@@ -8,7 +8,7 @@ import router from './router'
 import store from './store'
 
 import ElementUI from 'element-ui';
-// import './plugins/element.js'
+
 import './assets/css/global.css'
 import './styles/button.less'
 import './assets/fonts/iconfont.css'
@@ -20,7 +20,11 @@ import './router/permission'
 // 导入依赖插件
 import TreeTable from 'vue-table-with-tree-grid'
 
+import dataV from '@jiaminghi/data-view'
 
+
+
+Vue.use(dataV)
 Vue.use(ElementUI);
 
 Vue.prototype.$moment = moment
@@ -32,7 +36,7 @@ Vue.prototype.dateFormat = function(row, column, cellValue, index) {
 };
 
 // 配置请求根路径
-axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
+axios.defaults.baseURL = ''
 // 请求拦截器 对请求预处理
 axios.interceptors.request.use(config=>{
   config.headers.Authorization = window.sessionStorage.getItem('token')

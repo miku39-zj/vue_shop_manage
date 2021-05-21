@@ -20,8 +20,8 @@
         </el-button>
         <template #dropdown>
           <el-dropdown-menu size="small">
-            <el-dropdown-item command="other">关闭其他</el-dropdown-item>
-            <el-dropdown-item command="all">关闭所有</el-dropdown-item>
+            <el-dropdown-item command="handleOther">关闭其他</el-dropdown-item>
+            <el-dropdown-item command="handleAll">关闭所有</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -37,23 +37,63 @@
     data() {
       return {}
     },
-    methods: {
-      isActive(path) {
-        console.log(path === this.$route.fullPath);
-        return path === this.$route.fullPath;
-      },
-      closeTags() {
-
-      },
-      handleTags() {
-
-      }
-    },
     computed: {
       ...mapGetters(["tagList"]),
       showTags() {
         return this.tagList.length > 0;
       }
+    },
+    methods: {
+      isActive(path) {
+        return path === this.$route.fullPath;
+      },
+      closeTags(i) {
+        const curTag = this.tagList[i]
+        this.$store.commit("DEL_TAGLIST", {
+          index: i
+        });
+        if (curTag.path === this.$route.fullPath) {
+          this.$router.push(this.tagList[i - 1].path)
+        }
+      },
+      handleTags(val) {
+        if (val === "handleOther") { // 关闭其他
+          const curItem = this.tagList.filter(item => {
+            return item.path === this.$route.fullPath;
+          });
+          this.$store.commit("DEL_OTHER_TAGLIST", curItem);
+        } else {
+          this.$store.DEL_ALL_TAGLIST("clearTags");
+          this.$router.push("/");
+        }
+      },
+      setTag(route) {
+        const isExist = this.tagList.some(item => {
+          return item.path === route.fullPath;
+        });
+        if (!isExist) {
+          if (this.tagList.lengtht > 7) {
+            this.$store.commit("DEL_TAGLIST", {
+              index: 0
+            });
+          }
+          this.$store.commit("SET_TAGLIST", {
+            name: route.name,
+            title: route.meta.title,
+            path: route.fullPath
+          });
+        }
+      },
+    },
+
+    watch: {
+      $route(newValue) {
+        this.setTag(newValue);
+      }
+    },
+
+    created() {
+      this.setTag(this.$route);
     },
   }
 </script>
@@ -66,6 +106,7 @@
     background: #fff;
     padding-right: 120px;
     box-shadow: 0 5px 10px #ddd;
+    background: #F5F7F9;
   }
 
   .tags ul {
@@ -74,18 +115,19 @@
     height: 100%;
     margin: 0;
     padding: 0;
+
   }
 
   .tags-li {
     float: left;
     margin: 3px 5px 2px 3px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 3px;
     font-size: 12px;
     overflow: hidden;
     cursor: pointer;
-    height: 23px;
     line-height: 23px;
-    background: #fff;
+    background: rgba(255, 255, 255, .8);
     padding: 0 10px 0 10px;
     vertical-align: middle;
     color: #666;

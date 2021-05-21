@@ -6,6 +6,10 @@ body,
     padding: 0;
     min-width: 1366px;
 }
+
+a {
+  text-decoration: none !important;
+}
 .el-breadcrumb{
     margin-bottom: 15px;
     font-size: 12px;

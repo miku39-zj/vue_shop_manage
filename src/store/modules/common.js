@@ -27,27 +27,13 @@ const common = {
     DEL_ALL_TAGLIST: (state) => {
       state.visitedViews = []
     },
-    //删除标签，非active标签
+    //删除标签
     DEL_TAGLIST(state, data) {
       state.tagList.splice(data.index, 1);
     },
-    //删除当前标签
-    DEL_CURRENT_TAGLIST(state, data) {
-      const n = state.tagList.length
-      for (let i = 0; i < n; i++) {
-        const item = state.tagList[i];
-        if (item.path === data.$route.fullPath) {
-          if (i < len - 1) {
-            data.$router.push(state.tagList[i + 1].path);
-          } else if (i > 0) {
-            data.$router.push(state.tagList[i - 1].path);
-          } else {
-            data.$router.push("/");
-          }
-          state.tagList.splice(i, 1);
-          break;
-        }
-      }
+    //删除其他标签
+    DEL_OTHER_TAGLIST(state, data) {
+      state.tagList = data;
     },
   },
 
