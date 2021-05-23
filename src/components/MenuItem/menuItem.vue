@@ -1,20 +1,20 @@
 <template>
   <div v-if="!item.hidden">
     <template v-if="checkOneChild(item.children,item)">
-      <router-link v-if="onlyOneChild.meta && !onlyOneChild.meta.hidden" :to="resolvePath(onlyOneChild.path)">
-        <el-menu-item :index="resolvePath(onlyOneChild.path,2)" :class="{'submenu-title-noDropdown' : isNest }">
+      <router-link v-if="onlyOneChild.meta && !onlyOneChild.meta.hidden" :to="onlyOneChild.path">
+        <el-menu-item :index="onlyOneChild.name" :class="{'submenu-title-noDropdown' : isNest }">
           <i :class="onlyOneChild.meta.icon || (item.meta && item.meta.icon)" style="color: #ffffff" />
           <span slot='title'>{{onlyOneChild.meta.title}}</span>
         </el-menu-item>
       </router-link>
     </template>
-    <el-submenu v-else ref="subMenu" :index="resolvePath(item.path)" popper-append-to-body>
-      <template v-slot:title v-if="item.meta">
-        <i :class="item.meta && item.meta.icon" style="color: #ffffff" />
-        <span>{{item.meta.title}}</span>
+    <el-submenu v-else ref="subMenu" :index="item.name" popper-append-to-body>
+      <template v-slot:title>
+        <i v-if="item.meta" :class="item.meta && item.meta.icon" style="color: #ffffff" />
+        <span v-if="item.meta" slot='title'>{{item.meta.title}}</span>
       </template>
       <menuItem v-for="child in item.children" :key="child.path" :is-nest='true' :item='child'
-        :base-path="resolvePath(child.path)" />
+        :base-path="child.path" />
     </el-submenu>
   </div>
 </template>
@@ -55,7 +55,7 @@
             return true
           }
         })
-
+        console.log(showingChildren, "showingChildren");
         // 当只有一个子路由,子路由默认展示
         if (showingChildren.length === 1) {
           return true
@@ -64,14 +64,16 @@
         if (showingChildren.length === 0) {
           this.onlyOneChild = {
             ...parent,
-            path: '',
+            // path: '',
             noShowingChildren: true
           }
+          console.log(this.onlyOneChild, "this.onlyOneChild");
           return true
         }
         return false
       },
-      resolvePath(routePath,val) {
+      resolvePath(routePath, val) {
+        // console.log(path.resolve(this.basePath, routePath),111);
         return path.resolve(this.basePath, routePath) //解析成绝对路径
       }
     }

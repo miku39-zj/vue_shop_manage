@@ -29,12 +29,6 @@
 
 <script>
   export default {
-    props: {
-      EditRow: {
-        type: Object,
-        default: {},
-      }
-    },
     data() {
       return {
         isEdit: {
@@ -73,14 +67,17 @@
       };
     },
     methods: {
-      initPage(val) {
+      // 新增 编辑
+      initPage(val, row) {
         this.isEdit = val
         this.dialogVisible = true
-        if (!val) {
-          this.$nextTick(_ => {
-            this.$refs.AddFormDataRef.resetFields()
-          })
+        if (val) {
+          this.formLabelAlign = row
         }
+        this.$nextTick(_ => {
+          this.$refs.AddFormDataRef.resetFields()
+        })
+
       },
 
       sureAdd() {

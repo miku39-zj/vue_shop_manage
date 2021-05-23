@@ -17,13 +17,16 @@ import 'nprogress/nprogress.css'
 import axios from 'axios'
 import './icons'
 import './router/permission'
+
+//自动滚动插件
+import scroll from 'vue-seamless-scroll'
 // 导入依赖插件
 import TreeTable from 'vue-table-with-tree-grid'
 
 import dataV from '@jiaminghi/data-view'
 
 
-
+Vue.use(scroll)
 Vue.use(dataV)
 Vue.use(ElementUI);
 

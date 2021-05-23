@@ -3,7 +3,7 @@
 
     <el-container class="home-comtainer">
 
-      <el-aside :width="isCollapse ? '65px' : '180px'" class="home-sider">
+      <el-aside :width="isCollapse ? '64px' : '180px'" class="home-sider">
         <div class="siderBox">
           <div class="siderTitle">
             <svg-icon icon-class='backstage' className="backstage-icon" />
@@ -12,8 +12,8 @@
           <div class="siderMain">
             <el-menu class="siderMenu" background-color="#333744" text-color="#ffffff" active-text-color="#ffffff"
               :unique-opened="false" :collapse="isCollapse" :collapse-transition="false" router
-              :default-active="activeMenu">
-              <MenuItem v-for="route in common_routes" :key="route.path" :item="route" :base-path="route.path">
+              :default-active="activeMenu" mode="vertical">
+              <MenuItem v-for="route in common_routes" :key="route.name" :item="route" :base-path="route.path">
               </MenuItem>
             </el-menu>
           </div>
@@ -39,17 +39,18 @@
           <TagsViews />
           <!-- 路由占位符 -->
           <div class="main-views">
+            <!-- <router-view v-slot="{ Component }">
+              <transition name="move" mode="out-in">
+                <keep-alive :include="tagList">
+                  <component :is="Component" />
+                </keep-alive>
+              </transition>
+            </router-view> -->
             <transition name="move" mode="out-in">
               <router-view />
             </transition>
           </div>
-          <!-- <router-view v-slot="{ Component }">
-            <transition name="move" mode="out-in">
-              <keep-alive :include="tagList">
-                <component :is="Component" />
-              </keep-alive>
-            </transition>
-          </router-view> -->
+
         </el-main>
       </el-container>
 
@@ -73,18 +74,18 @@
       TagsViews
     },
     computed: {
-      ...mapGetters(["common_routes"]),
+      ...mapGetters(["common_routes","tagList"]),
       activeMenu() {
         const route = this.$route;
         const {
           meta,
-          path
+          path,
+          name
         } = route;
-        console.log(route, "route123");
         if (meta.activeMenu) {
           return meta.activeMenu;
         }
-        return path;
+        return name;
       },
     },
     data() {
@@ -96,8 +97,8 @@
         menulist: [],
       }
     },
-    mounted() {
-      console.log(this.common_routes);
+    created() {
+      console.log(this.common_routes, "this.common_routes");
     },
     methods: {
 
@@ -165,9 +166,10 @@
 
     .siderMenu {
       width: 100%;
+
+
     }
   }
-
 
 
   .home-header {
@@ -224,19 +226,20 @@
     padding: 0px !important;
   }
 
-  .main-views{
+  .main-views {
     padding: 10px 10px 0 10px;
     width: 100%;
     box-sizing: border-box;
     height: calc(100% - 35px);
     overflow-x: hidden;
     overflow-y: auto;
-    -ms-overflow-style: none; 
+    -ms-overflow-style: none;
     overflow: '-moz-scrollbars-none';
-    scrollbar-width: none;  /*  火狐   */
+    scrollbar-width: none;
+    /*  火狐   */
     background: #F5F7F9;
-    background-image: linear-gradient(to right,#ffffff, #ffffff)
-}
+    // background-image: linear-gradient(to right, #ffffff, #ffffff)
+  }
 
   .iconfont {
     margin-right: 10px;

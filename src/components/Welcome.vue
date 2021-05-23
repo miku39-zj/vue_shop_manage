@@ -1,6 +1,7 @@
 <template>
   <section>
-    <el-row :gutter="20">
+    <el-row :gutter="20" class="header-row">
+
       <el-col :span="8">
         <el-card shadow="hover" class="header-msg">
           <div class="user-info">
@@ -14,35 +15,228 @@
                 <p>早上好,admin,祝你新的一天工作愉快</p>
                 <p>今天小雨转阴天,21~27°,天凉,注意加衣</p>
               </div>
+              <!-- <div class="user-info-list">
+                上次登录时间：
+                <span>2020-10-01</span>
+              </div>
+              <div class="user-info-list">
+                上次登录地点：
+                <span>伟大航路</span>
+              </div> -->
             </div>
-          </div>
-          <div class="user-info-list">
-            上次登录时间：
-            <span>2020-10-01</span>
-          </div>
-          <div class="user-info-list">
-            上次登录地点：
-            <span>伟大航路</span>
           </div>
         </el-card>
       </el-col>
+      <el-col :span="16">
+        <el-card shadow="hover" class="header-msg">
+          <el-row :gutter="20">
+            <el-col :span="6">
+
+              <div class="tip-content ">
+                <div class="icon-box chaseBox">
+                  <svg-icon icon-class='chase' className="tip-icon" />
+                </div>
+                <div class="grid-cont-right">
+                  <div class="grid-num">339</div>
+                  <div>追番数</div>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="tip-content">
+                <div class="icon-box todolistBox">
+                  <svg-icon icon-class='todolist' className="tip-icon" />
+                </div>
+                <div class="grid-cont-right">
+                  <div class="grid-num">39</div>
+                  <div>待办事项</div>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="tip-content">
+                <div class="icon-box msgBox">
+                  <svg-icon icon-class='msg' className="tip-icon" />
+                </div>
+                <div class="grid-cont-right">
+                  <div class="grid-num">393</div>
+                  <div>系统消息</div>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="tip-content">
+                <div class="icon-box githubBox">
+                  <svg-icon icon-class='github' className="tip-icon" />
+                </div>
+                <div class="grid-cont-right">
+                  <div class="grid-num">3</div>
+                  <div>项目数量</div>
+                </div>
+              </div>
+            </el-col>
+          </el-row>
+        </el-card>
+      </el-col>
+
+    </el-row>
+    <el-row :gutter="20" class="secend-row">
       <el-col :span="10">
-        111111111
+        <el-card shadow="hover">
+          <span class="chase-rank">追番排名:</span>
+          <dv-scroll-ranking-board :config="config" class="ranking-board" />
+        </el-card>
+        <el-card shadow="hover">
+          <div class="dynamic-titel">
+            <div>最新动态</div>
+            <div>更多</div>
+          </div>
+          <vue-seamless-scroll :data='dynamicList' class="dynamic-warp">
+            <div class="dynamic-list" v-for="item in dynamicList" :key="item.name">
+              <div class="dynamic-list-left">
+                <!-- <img src="http://public.nodebook.top/fd123a3921e910809fba9da0101bf8f6.jpg" /> -->
+              </div>
+              <div class="dynamic-list-right">
+                <p class="dynamic-list-right-top">
+                  <span>{{item.name}}</span>
+                  <span>{{item.type}}</span>
+                  <span>{{item.msg}}</span>
+                </p>
+                <p class="dynamic-list-right-bottom">
+                  {{item.time}}
+                </p>
+              </div>
+            </div>
+          </vue-seamless-scroll>
+        </el-card>
       </el-col>
     </el-row>
-
   </section>
 </template>
 
 <script>
   export default {
-
+    data() {
+      return {
+        dynamicList: [{
+            name: '小张',
+            type: '订购了',
+            msg: '紫砂壶',
+            time: '12-10 10:12'
+          },
+          {
+            name: '小李',
+            type: '订购了',
+            msg: '绿茶',
+            time: '12-10 10:12'
+          },
+          {
+            name: '小王',
+            type: '订购了',
+            msg: '清茶',
+            time: '12-10 10:12'
+          },
+          {
+            name: '小林',
+            type: '订购了',
+            msg: '茉莉花茶',
+            time: '12-10 10:12'
+          },
+        ],
+        config: {
+          data: [{
+              name: '海贼王',
+              value: 5656
+            },
+            {
+              name: 'overlord',
+              value: 4141
+            },
+            {
+              name: '火影忍者',
+              value: 3565
+            },
+            {
+              name: '妖精的尾巴',
+              value: 8451
+            },
+            {
+              name: '轻音少女',
+              value: 4321
+            },
+            {
+              name: '七龙珠',
+              value: 9999
+            },
+            {
+              name: '转生蜘蛛又怎样',
+              value: 3939
+            }
+          ],
+        }
+      }
+    }
   }
 </script>
 
 <style lang="less" scoped>
+
+
   .header-msg {
-    height: 250px;
+    height: 20vh;
+  }
+
+  .tip-content {
+    display: flex;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    align-items: center;
+    height: 100px;
+  }
+
+  .grid-cont-right {
+    flex: 1;
+    text-align: center;
+    font-size: 14px;
+    color: #999;
+  }
+
+  .grid-num {
+    font-size: 30px;
+    font-weight: bold;
+  }
+
+  .icon-box {
+    font-size: 30px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 80px;
+    color: #fff;
+
+    .tip-icon {
+      width: 2em;
+      width: 2em;
+    }
+  }
+
+  .chaseBox {
+    background: rgb(242, 94, 67);
+
+  }
+
+  .todolistBox {
+    background: #3eede7;
+  }
+
+  .msgBox {
+    background: rgb(100, 213, 114);
+
+  }
+
+  .githubBox {
+    background: rgb(45, 140, 240);
   }
 
 
@@ -50,8 +244,8 @@
     display: flex;
     align-items: center;
     padding-bottom: 20px;
-    border-bottom: 2px solid rgb(106, 163, 216);
-    margin-bottom: 20px;
+    // border-bottom: 2px solid rgb(106, 163, 216);
+    // margin-bottom: 20px;
   }
 
 
@@ -61,7 +255,6 @@
     width: 120px;
     height: 120px;
     border-radius: 50%;
-
   }
 
   .user-info-name {
@@ -82,13 +275,95 @@
     color: #222;
   }
 
-  .user-info-list {
-    font-size: 14px;
-    color: #999;
-    line-height: 25px;
+  .secend-row {
+    margin-top: 10px;
+
   }
 
-  .user-info-list span {
-    margin-left: 40px;
+  .chase-rank {
+    // border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .ranking-board {
+    width: 600px;
+    height: 300px;
+    color: #000;
+  }
+
+  .dynamic-titel {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    padding-bottom: 5px;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .dynamic-titel div:nth-child(2) {
+    color: #ce17af;
+    margin-left: 5px;
+    // flex: 1;
+  }
+
+  .dynamic {
+    width: 100%;
+    height: auto;
+  }
+
+  .dynamic-warp {
+    // height: 651px;
+    overflow: hidden;
+  }
+
+  .dynamic-list {
+    width: 100%;
+    height: 93px;
+    padding: 25px 0;
+    border-bottom: 1px solid #dcdfe6;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+
+  .dynamic-list:hover {
+    background: #DBFEFB;
+  }
+
+  .dynamic-list-left,
+  .dynamic-list-left img {
+    width: 42px;
+    height: 42px;
+    border-radius: 21px;
+    overflow: hidden;
+    margin-right: 25px;
+  }
+
+  .dynamic-list-right {
+    flex: 1;
+    height: 52px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+  }
+
+  .dynamic-list-right .dynamic-list-right-top {
+    font-size: 14px;
+  }
+
+
+  .dynamic-list-right-top span:nth-child(1) {
+    color: #3B3C3C;
+    margin-right: 15px;
+  }
+
+  .dynamic-list-right-top span:nth-child(2) {
+    color: #7C7E81;
+    margin-right: 5px;
+  }
+
+  .dynamic-list-right-top span:nth-child(3) {
+    color: #2E93FD;
   }
 </style>

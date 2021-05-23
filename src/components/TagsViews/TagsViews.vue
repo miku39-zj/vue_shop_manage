@@ -62,8 +62,8 @@
             return item.path === this.$route.fullPath;
           });
           this.$store.commit("DEL_OTHER_TAGLIST", curItem);
-        } else {
-          this.$store.DEL_ALL_TAGLIST("clearTags");
+        } else { // 关闭所有
+          this.$store.commit("DEL_ALL_TAGLIST");
           this.$router.push("/");
         }
       },
@@ -121,7 +121,7 @@
   .tags-li {
     float: left;
     margin: 3px 5px 2px 3px;
-    border: 1px solid rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 3px;
     font-size: 12px;
     overflow: hidden;

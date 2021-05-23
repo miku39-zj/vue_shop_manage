@@ -140,7 +140,6 @@
     height: 40px;
     background-repeat: no-repeat;
     background-size: cover;
-
     border-radius: 50%;
     margin: 5px 5px;
   }

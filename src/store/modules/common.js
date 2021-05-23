@@ -25,7 +25,7 @@ const common = {
     },
     //清除所有标签
     DEL_ALL_TAGLIST: (state) => {
-      state.visitedViews = []
+      state.tagList = []
     },
     //删除标签
     DEL_TAGLIST(state, data) {
@@ -45,15 +45,12 @@ const common = {
       return new Promise(resolve => {
         commit('SET_ROUTES', dynamicRoutes)
 
-        router.addRoutes(dynamicRoutes);
-
+        // router.addRoutes(dynamicRoutes);
         // router.addRoutes([{
         //   path: '*',
         //   hidden: true,
         //   redirect: "/"
         // }]);
-        console.log(dynamicRoutes,"dynamicRoutes");
-        console.log(router,"router54565465");
         resolve(dynamicRoutes)
       })
     }

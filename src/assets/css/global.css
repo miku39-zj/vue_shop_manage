@@ -40,3 +40,21 @@ a {
 .el-dialog__body {
   padding: 10px 20px !important;
 }
+
+ /*隐藏文字*/
+ .el-menu--collapse .el-submenu__title span {
+  display: none;
+}
+
+/*隐藏 > */
+.el-menu--collapse .el-submenu__title .el-submenu__icon-arrow {
+  display: none;
+}
+
+.el-row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+.el-col {
+  /* padding: 0 !important; */
+}

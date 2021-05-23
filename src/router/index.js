@@ -29,13 +29,13 @@ export const constRouter = [{
     hidden: true //导航菜单忽略选项
   },
   {
-    path: '',
+    path: '/',
     component: Home,
     redirect: '/home',
     hidden: true,
   },
   {
-    path: '/home',
+    path: '/',
     component: Home,
     name: 'home',
     meta: {
@@ -43,7 +43,7 @@ export const constRouter = [{
       icon: 'el-icon-s-home' //导航菜单图标
     },
     children: [{
-      path: '',
+      path: '/home',
       component: () => import('@/components/Welcome.vue'),
       name: 'welcome',
       meta: {
@@ -55,34 +55,35 @@ export const constRouter = [{
 ]
 
 export const dynamicRoutes = [{
-  path: '/User',
+  path: '/',
   component: Home,
-  redirect: 'User/userlist',
+  name:"User",
+  // redirect: '/User',
   meta: {
     title: "用户列表",
-    icon: 'el-icon-s-marketing',
+    icon: 'el-icon-user',
     hidden: false
   },
   children: [{
-      path: 'userlist',
+      path: '/User',
       component: () => import('@/views/User/userList.vue'),
       name: 'userlist',
       meta: {
         title: "用户列表",
-        icon: 'el-icon-tickets',
+        icon: 'el-icon-user',
         hidden: false,
       }
     },
     {
-      path: 'user1',
-      component: () => import('@/views/User/userList.vue'),
-      name: 'user1',
+      path: '/Skill',
+      component: () => import('@/views/User/skillList.vue'),
+      name: 'userSkill',
       meta: {
-        title: "用户列表",
-        icon: 'el-icon-tickets',
+        title: "技能列表",
+        icon: 'el-icon-scissors',
         hidden: false,
       }
-    }
+    },
   ]
 }]
 
