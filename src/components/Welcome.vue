@@ -86,7 +86,7 @@
           <span class="chase-rank">追番排名:</span>
           <dv-scroll-ranking-board :config="config" class="ranking-board" />
         </el-card>
-        <el-card shadow="hover">
+        <el-card shadow="hover" class="dynamic-box">
           <div class="dynamic-titel">
             <div>最新动态</div>
             <div>更多</div>
@@ -94,7 +94,7 @@
           <vue-seamless-scroll :data='dynamicList' class="dynamic-warp">
             <div class="dynamic-list" v-for="item in dynamicList" :key="item.name">
               <div class="dynamic-list-left">
-                <!-- <img src="http://public.nodebook.top/fd123a3921e910809fba9da0101bf8f6.jpg" /> -->
+                <svg-icon icon-class='github' className="tip-icon" />
               </div>
               <div class="dynamic-list-right">
                 <p class="dynamic-list-right-top">
@@ -119,27 +119,39 @@
     data() {
       return {
         dynamicList: [{
-            name: '小张',
-            type: '订购了',
-            msg: '紫砂壶',
+            name: '蜘蛛子',
+            type: '追了新番',
+            msg: '海贼王',
             time: '12-10 10:12'
           },
           {
-            name: '小李',
-            type: '订购了',
-            msg: '绿茶',
+            name: '路飞',
+            type: '追了新番',
+            msg: '火影忍者',
             time: '12-10 10:12'
           },
           {
-            name: '小王',
-            type: '订购了',
-            msg: '清茶',
+            name: '平泽唯',
+            type: '追了新番',
+            msg: '轻音少女',
             time: '12-10 10:12'
           },
           {
-            name: '小林',
-            type: '订购了',
-            msg: '茉莉花茶',
+            name: '五条悟',
+            type: '追了新番',
+            msg: 'overlord',
+            time: '12-10 10:12'
+          },
+          {
+            name: '飞鼠',
+            type: '追了新番',
+            msg: '转生蜘蛛又怎样',
+            time: '12-10 10:12'
+          },
+          {
+            name: '佐助',
+            type: '追了新番',
+            msg: '咒术回战',
             time: '12-10 10:12'
           },
         ],
@@ -180,8 +192,6 @@
 </script>
 
 <style lang="less" scoped>
-
-
   .header-msg {
     height: 20vh;
   }
@@ -286,8 +296,13 @@
 
   .ranking-board {
     width: 600px;
-    height: 300px;
+    height: 30vh;
     color: #000;
+  }
+
+  .dynamic-box {
+    margin-top: 10px;
+    height: 30vh;
   }
 
   .dynamic-titel {
@@ -345,11 +360,11 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-
   }
 
   .dynamic-list-right .dynamic-list-right-top {
-    font-size: 14px;
+    font-size: 15px;
+    line-height: 15px;
   }
 
 
@@ -365,5 +380,10 @@
 
   .dynamic-list-right-top span:nth-child(3) {
     color: #2E93FD;
+  }
+
+  .dynamic-list-right-bottom {
+    color: #999999;
+    font-size: 12px;
   }
 </style>

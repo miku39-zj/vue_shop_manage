@@ -3,35 +3,33 @@
     <div class="searchBox">
       <el-form ref="form" size="small" inline :model="queryFrom">
         <el-form-item>
-          <el-select v-model="queryFrom.animal" placeholder="请选择动漫类型" clearable>
+          <el-select v-model="queryFrom.skill" placeholder="请选择技能名称" clearable>
             <el-option v-for="(item, index) in options" :key="index" :label="item" :value="item"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-date-picker style="width:400px" v-model="rangeData" type="daterange" range-separator="至"
-            start-placeholder="开始日期" end-placeholder="结束日期" value-format="yyyy-MM-dd" clearable></el-date-picker>
+          <el-input v-model="queryFrom.name" placeholder="请输入使用者姓名"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button icon="el-icon-search" class="MyQueryButton" @click="getPage(1)">
             搜索
           </el-button>
         </el-form-item>
-        <el-form-item>
+        <!-- <el-form-item>
           <el-button class="MyCreateButton" size="small" @click="insertEvent">新增人员</el-button>
           <el-button class="MyDeleteButton" size="small" @click="removeEvent({})">删除人员</el-button>
-        </el-form-item>
+        </el-form-item> -->
       </el-form>
     </div>
     <el-table :header-cell-style="{background:'#d8effb',color:'#555'}" class="tableBox" stripe border
       highlight-current-row ref="xTable" height="75vh" @selection-change="applySelect" size="mini" :data="tableData">
       <el-table-column type="selection" width="55" align="center"></el-table-column>
       <el-table-column type="index" width="50" align="center" label="序号"></el-table-column>
-      <el-table-column prop="animal" label="动漫类型" align="center"></el-table-column>
+      <el-table-column prop="skill" label="技能名称" align="center"></el-table-column>
       <el-table-column prop="name" label="姓名" align="center"></el-table-column>
-      <el-table-column prop="time" label="新增时间" align="center"></el-table-column>
       <el-table-column prop="sex" label="性别" align="center">
       </el-table-column>
-      <el-table-column prop="power" label="战力" align="center">
+      <el-table-column prop="damage" label="伤害" align="center">
       </el-table-column>
       <el-table-column label="操作" width="150" align="center">
         <template slot-scope="scope">
@@ -69,7 +67,7 @@
       return {
         options: [],
         queryFrom: {
-          animal: ""
+          skill: ""
         },
         tableLoading: false,
         purchaseLis: [],
@@ -108,67 +106,67 @@
 
       async QueryPage() {
         this.tableData = [{
-            animal: "海贼王",
+            skill: "橡胶火箭炮",
             name: "路飞",
             time: "2019-02-18",
             sex: "男",
-            power: "9999"
+            damage: "9999"
           },
           {
-            animal: "R0:从零开始的异世界",
+            skill: "飞锤",
             name: "蕾姆",
             time: "2019-06-18",
             sex: "女",
-            power: "6666"
+            damage: "6666"
           },
           {
-            animal: "火影忍者",
+            skill: "螺旋丸",
             name: "鸣人",
             time: "2019-06-18",
             sex: "男",
-            power: "8885"
+            damage: "8885"
           },
           {
-            animal: "妖精的尾巴",
+            skill: "红莲爆炎刃",
             name: "纳兹",
             time: "2020-06-18",
             sex: "男",
-            power: "9888"
+            damage: "9888"
           },
           {
-            animal: "约会大作战",
+            skill: "绝灭天使-光剑",
             name: "折纸鸢一",
             time: "2020-06-18",
             sex: "女",
-            power: "5464"
+            damage: "5464"
           },
           {
-            animal: "迪迦奥特曼",
+            skill: "➽➽➽",
             name: "迪迦",
             time: "2006-07-14",
             sex: "男",
-            power: "1999"
+            damage: "1999"
           },
           {
-            animal: "轻音少女",
+            skill: "亮表情",
             name: "平泽唯",
             time: "2010-07-14",
             sex: "女",
-            power: "0"
+            damage: "0"
           },
           {
-            animal: "overlord",
+            skill: "超位魔法",
             name: "飞鼠",
             time: "2015-01-18",
             sex: "男",
-            power: "99999"
+            damage: "99999"
           },
           {
-            animal: "七龙珠",
+            skill: "龟太气功",
             name: "孙悟空",
             time: "2018-03-23",
             sex: "男",
-            power: "99999999"
+            damage: "99999999"
           },
         ]
         this.total = this.tableData.length
@@ -176,7 +174,7 @@
       },
 
       getAnimaType() {
-        this.options = [...new Set(this.tableData.map(x => x.animal))]
+        this.options = [...new Set(this.tableData.map(x => x.skill))]
       },
 
       editEvent(row) {
@@ -247,14 +245,17 @@
       height: 1.2em;
       cursor: pointer;
       vertical-align: text-top;
-      
+
     }
+
     .edit-icon {
       fill: #0066e4;
     }
+
     .view-icon {
       fill: #5caf18;
     }
+
     .delete-icon {
       fill: #fe1a00;
     }
