@@ -82,8 +82,8 @@
     </el-row>
     <el-row :gutter="20" class="secend-row">
       <el-col :span="10">
-        <el-card shadow="hover">
-          <span class="chase-rank">追番排名:</span>
+        <el-card shadow="hover" class="rank-box">
+          <div class="chase-rank">追番排名:</div>
           <dv-scroll-ranking-board :config="config" class="ranking-board" />
         </el-card>
         <el-card shadow="hover" class="dynamic-box">
@@ -94,7 +94,7 @@
           <vue-seamless-scroll :data='dynamicList' class="dynamic-warp">
             <div class="dynamic-list" v-for="item in dynamicList" :key="item.name">
               <div class="dynamic-list-left">
-                <svg-icon icon-class='github' className="tip-icon" />
+                <svg-icon :icon-class='item.iconName' className="myIcon" />
               </div>
               <div class="dynamic-list-right">
                 <p class="dynamic-list-right-top">
@@ -110,49 +110,78 @@
           </vue-seamless-scroll>
         </el-card>
       </el-col>
+      <el-col :span="14">
+        <el-card shadow="hover" class="dataV-box">
+          <div class="quick-nav">
+            <div class="nav-box">
+              <div class="nav-title">快捷导航</div>
+              <div class="nav-item">1</div>
+              <div class="nav-item">2</div>
+              <div class="nav-item">3</div>
+              <div class="nav-item">4</div>
+            </div>
+            <div class="nav-chart">
+              <dv-charts :option="option" class="dataV-contain" />
+            </div>
+          </div>
+
+        </el-card>
+        <el-card shadow="hover" class="chart-box">
+          <div id="chart-contain" class="chart-contain"></div>
+        </el-card>
+      </el-col>
     </el-row>
   </section>
 </template>
 
 <script>
+  import * as echarts from 'echarts';
+  import '@/assets/theme/purple-passion.js'
   export default {
     data() {
       return {
+        option: {},
         dynamicList: [{
             name: '蜘蛛子',
             type: '追了新番',
             msg: '海贼王',
-            time: '12-10 10:12'
+            time: '05-10 10:05',
+            iconName: "avatar",
           },
           {
             name: '路飞',
             type: '追了新番',
             msg: '火影忍者',
-            time: '12-10 10:12'
+            time: '05-10 10:05',
+            iconName: "avatar1",
           },
           {
             name: '平泽唯',
             type: '追了新番',
             msg: '轻音少女',
-            time: '12-10 10:12'
+            time: '05-10 10:05',
+            iconName: "avatar2",
           },
           {
             name: '五条悟',
             type: '追了新番',
             msg: 'overlord',
-            time: '12-10 10:12'
+            time: '05-10 10:05',
+            iconName: "avatar3",
           },
           {
             name: '飞鼠',
             type: '追了新番',
             msg: '转生蜘蛛又怎样',
-            time: '12-10 10:12'
+            time: '05-10 10:05',
+            iconName: "avatar4",
           },
           {
             name: '佐助',
             type: '追了新番',
             msg: '咒术回战',
-            time: '12-10 10:12'
+            time: '05-10 10:05',
+            iconName: "avatar5",
           },
         ],
         config: {
@@ -187,6 +216,226 @@
           ],
         }
       }
+    },
+    methods: {
+      initChart() {
+        const myChart = echarts.init(document.getElementById('chart-contain'));
+        const option = {
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'cross',
+              crossStyle: {
+                color: '#999'
+              }
+            }
+          },
+          toolbox: {
+            feature: {
+              dataView: {
+                show: true,
+                readOnly: false
+              },
+              magicType: {
+                show: true,
+                type: ['line', 'bar']
+              },
+              restore: {
+                show: true
+              },
+              saveAsImage: {
+                show: true
+              }
+            }
+          },
+          legend: {
+            data: ['蒸发量', '降水量', '平均温度']
+          },
+          xAxis: [{
+            type: 'category',
+            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+            axisPointer: {
+              type: 'shadow'
+            }
+          }],
+          yAxis: [{
+              type: 'value',
+              name: '水量',
+              min: 0,
+              max: 250,
+              interval: 50,
+              axisLabel: {
+                formatter: '{value} ml'
+              }
+            },
+            {
+              type: 'value',
+              name: '温度',
+              min: 0,
+              max: 25,
+              interval: 5,
+              axisLabel: {
+                formatter: '{value} °C'
+              }
+            }
+          ],
+          series: [{
+              name: '蒸发量',
+              type: 'bar',
+              data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+            },
+            {
+              name: '降水量',
+              type: 'bar',
+              data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+            },
+            {
+              name: '平均温度',
+              type: 'line',
+              yAxisIndex: 1,
+              data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+            }
+          ]
+        };
+        myChart.setOption(option, {
+          notMerge: true
+        })
+      },
+      initDataV() {
+        const option1 = {
+          title: {
+            text: '畅销饮料占比饼状图'
+          },
+          legend: {
+            data: ['同比', '环比'],
+            orient: 'vertical'
+          },
+          series: [{
+              name: '同比',
+              type: 'pie',
+              data: [{
+                  name: '可口可乐',
+                  value: 93
+                },
+                {
+                  name: '百事可乐',
+                  value: 32
+                },
+                {
+                  name: '哇哈哈',
+                  value: 65
+                },
+                {
+                  name: '康师傅',
+                  value: 44
+                },
+                {
+                  name: '统一',
+                  value: 52
+                },
+              ],
+              radius: '30%',
+              outsideLabel: {
+                show: false
+              },
+              insideLabel: {
+                show: true
+              }
+            },
+            {
+              name: '环比',
+              type: 'pie',
+              data: [{
+                  name: '可口可乐',
+                  value: 93
+                },
+                {
+                  name: '百事可乐',
+                  value: 32
+                },
+                {
+                  name: '哇哈哈',
+                  value: 65
+                },
+                {
+                  name: '康师傅',
+                  value: 44
+                },
+                {
+                  name: '统一',
+                  value: 52
+                },
+              ],
+              radius: ['40%', '50%']
+            }
+          ]
+        }
+
+        const option2 = {
+          title: {
+            text: '项目语言占比'
+          },
+          legend: {
+            data: ['同比', '环比']
+          },
+          series: [{
+              name: '同比',
+              type: 'pie',
+              data: [{
+                  name: 'JS',
+                  value: 93
+                },
+                {
+                  name: 'VUE',
+                  value: 32
+                },
+                {
+                  name: 'CSS',
+                  value: 65
+                },
+                {
+                  name: 'HTML',
+                  value: 44
+                }
+              ],
+              radius: '30%',
+              outsideLabel: {
+                show: false
+              },
+              insideLabel: {
+                show: true
+              }
+            },
+            {
+              name: '环比',
+              type: 'pie',
+              data: [{
+                  name: 'JS',
+                  value: 93
+                },
+                {
+                  name: 'VUE',
+                  value: 32
+                },
+                {
+                  name: 'CSS',
+                  value: 65
+                },
+                {
+                  name: 'HTML',
+                  value: 44
+                }
+              ],
+              radius: ['40%', '50%']
+            }
+          ]
+        }
+        this.option = option2
+      }
+    },
+    mounted() {
+      this.initChart()
+      this.initDataV()
     }
   }
 </script>
@@ -291,7 +540,8 @@
   }
 
   .chase-rank {
-    // border: 1px solid rgba(0, 0, 0, 0.1);
+    // border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    height: 20px
   }
 
   .ranking-board {
@@ -346,25 +596,26 @@
   }
 
   .dynamic-list-left,
-  .dynamic-list-left img {
-    width: 42px;
-    height: 42px;
-    border-radius: 21px;
+  .dynamic-list-left svg {
+    width: 45px;
+    height: 45px;
     overflow: hidden;
-    margin-right: 25px;
+    margin-right: 20px;
   }
 
   .dynamic-list-right {
     flex: 1;
-    height: 52px;
+    height: 45px;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+
   }
 
   .dynamic-list-right .dynamic-list-right-top {
     font-size: 15px;
     line-height: 15px;
+    margin: 10px 0 0 0;
   }
 
 
@@ -385,5 +636,91 @@
   .dynamic-list-right-bottom {
     color: #999999;
     font-size: 12px;
+    margin: 10px 0 0 0px;
+  }
+
+  .dataV-box {
+    width: 100%;
+    height: 31vh;
+
+    /deep/ .el-card__body {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .quick-nav {
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+  }
+
+  .nav-box {
+    width: 50%;
+    height: 90%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .nav-title {
+      width: 100%;
+      height: 10%;
+      box-sizing: border-box;
+    }
+
+    .nav-item {
+      width: 50%;
+      height: 45%;
+      box-sizing: border-box;
+    }
+  }
+
+  .nav-box div:nth-child(2) {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-box div:nth-child(3) {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-box div:nth-child(4) {
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-box div:nth-child(5) {
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+
+
+  .nav-chart {
+    width: 50%;
+    height: 100%;
+  }
+
+  .dataV-contain {
+    width: 95%;
+    height: 30vh;
+  }
+
+  .chart-box {
+    margin-top: 10px;
+    width: 100%;
+    height: 35vh;
+
+    /deep/ .el-card__body {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .chart-contain {
+    width: 95%;
+    height: calc(100% - 50px);
   }
 </style>

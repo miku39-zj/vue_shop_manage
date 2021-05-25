@@ -17,7 +17,7 @@ const IS_DEV = ["development"].includes(process.env.NODE_ENV);
 module.exports = {
   lintOnSave: false,
   devServer: {
-    hot: true,
+    hot: false,
     open:true
   },
   chainWebpack: config => {
