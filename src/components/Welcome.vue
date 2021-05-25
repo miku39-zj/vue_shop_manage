@@ -304,7 +304,7 @@
       initDataV() {
         const option1 = {
           title: {
-            text: '畅销饮料占比饼状图'
+            text: '项目语言占比'
           },
           legend: {
             data: ['同比', '环比'],
