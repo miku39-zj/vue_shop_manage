@@ -160,7 +160,7 @@
 
   .login_container {
     // background-color: #000;
-    background-image: url(../assets/img/32.jpg);
+    background-image: url(../assets/img/4.jpg);
     background-repeat: no-repeat;
     // clip-path: polygon(0% 0%, 84% 0, 100% 50%, 83% 100%, 0% 100%);
     background-size: cover;
@@ -194,7 +194,7 @@
     width: 400px;
     height: 400px;
     // background-color: #fff;
-    background: hsla(0, 0%, 100%, .7);
+    background: hsla(0, 0%, 100%, .6);
     border-radius: 3px;
     position: absolute;
     left: 50%;

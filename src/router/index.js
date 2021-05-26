@@ -105,12 +105,12 @@ export const dynamicRoutes = [{
         }
       },
       {
-        path: '/toTop',
-        component: () => import('@/views/Component/toTop.vue'),
-        name: 'toTop',
+        path: '/lazyImage',
+        component: () => import('@/views/Component/lazyImage.vue'),
+        name: 'lazyImage',
         meta: {
-          title: "置顶",
-          icon: 'el-icon-top',
+          title: "懒加载图片",
+          icon: 'el-icon-picture-outline',
           hidden: false,
         }
       },
@@ -131,7 +131,7 @@ export const dynamicRoutes = [{
         name: 'emojiMenu',
         meta: {
           title: "表情菜单",
-          icon: 'el-icon-cold-drink',
+          icon: 'el-icon-goblet-square-full',
           hidden: false,
         }
       },
@@ -140,8 +140,71 @@ export const dynamicRoutes = [{
         component: () => import('@/views/MenuList/IconMenu.vue'),
         name: 'iconMenu',
         meta: {
-          title: "图表菜单",
-          icon: 'el-icon-goblet-square-full',
+          title: "图标菜单",
+          icon: 'el-icon-bicycle',
+          hidden: false,
+        }
+      },
+
+    ]
+  },
+  {
+    path: '/',
+    component: Home,
+    name: "editor",
+    meta: {
+      title: "编辑器",
+      icon: 'el-icon-edit',
+      hidden: false
+    },
+    children: [{
+        path: '/richEdit',
+        component: () => import('@/views/Editor/RichEdit.vue'),
+        name: 'richEdit',
+        meta: {
+          title: "富文本编辑",
+          icon: 'el-icon-s-order',
+          hidden: false,
+        }
+      },
+      {
+        path: '/markdownEdit',
+        component: () => import('@/views/Editor/MarkdownEdit.vue'),
+        name: 'markdownEdit',
+        meta: {
+          title: "Markdown编辑",
+          icon: 'el-icon-s-cooperation',
+          hidden: false,
+        }
+      },
+    ]
+  },
+  {
+    path: '/',
+    component: Home,
+    name: "file",
+    meta: {
+      title: "文件相关",
+      icon: 'el-icon-folder',
+      hidden: false
+    },
+    children: [{
+        path: '/upload',
+        component: () => import('@/views/File/Upload.vue'),
+        name: 'upload',
+        meta: {
+          title: "文件上传",
+          icon: 'el-icon-upload2',
+          hidden: false,
+        }
+      },
+      {
+        path: '/download',
+        component: () => import('@/views/File/Download.vue'),
+        name: 'download',
+        meta: {
+          title: "文件下载",
+          icon: 'el-icon-download',
           hidden: false,
         }
       },

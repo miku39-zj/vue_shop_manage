@@ -3,7 +3,7 @@
 
     <el-container class="home-comtainer">
 
-      <el-aside :width="isCollapse ? '64px' : '180px'" class="home-sider">
+      <el-aside :width="isCollapse ? '64px' : '200px'" class="home-sider">
         <div class="siderBox">
           <div class="siderTitle">
             <svg-icon icon-class='backstage' className="backstage-icon" />
@@ -98,7 +98,7 @@
       }
     },
     created() {
-      console.log(this.common_routes, "this.common_routes");
+      // console.log(this.common_routes, "this.common_routes");
     },
     methods: {
 

@@ -50,19 +50,12 @@
         @size-change="handleSizeChange" :page-size="queryFrom.row" :page-sizes="[20,50,100]" :total="total"
         style="float:right;"></el-pagination>
     </el-col>
-    <AddEditUser ref="AddEditUser" @updata="updata"></AddEditUser>
-    <UserMsg ref="UserMsg"></UserMsg>
   </section>
 </template>
 
 <script>
-  import UserMsg from '@/components/UserChild/UserMsg'
-  import AddEditUser from '@/components/UserChild/AddEditUser'
   export default {
-    components: {
-      AddEditUser,
-      UserMsg
-    },
+
     data() {
       return {
         options: [],
