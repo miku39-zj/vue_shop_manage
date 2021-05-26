@@ -33,13 +33,13 @@
       </el-table-column>
       <el-table-column label="操作" width="150" align="center">
         <template slot-scope="scope">
-          <el-button type="text" title="编辑" @click="editEvent(scope.row)">
+          <el-button type="text" title="编辑" @click="editEvent(scope.row)" disabled>
             <svg-icon icon-class='edit' className="ebmsIcon edit-icon" />
           </el-button>
-          <el-button type="text" title="介绍" @click="viewEvent(scope.row)">
+          <el-button type="text" title="介绍" @click="viewEvent(scope.row)" disabled>
             <svg-icon icon-class='view' className="ebmsIcon view-icon" />
           </el-button>
-          <el-button type="text" title="删除" @click="removeEvent(scope.row)">
+          <el-button type="text" title="删除" @click="removeEvent(scope.row)" disabled>
             <svg-icon icon-class='delete' className="ebmsIcon delete-icon" />
           </el-button>
         </template>
@@ -243,7 +243,7 @@
     .ebmsIcon {
       width: 1.2em;
       height: 1.2em;
-      cursor: pointer;
+      // cursor: pointer;
       vertical-align: text-top;
 
     }

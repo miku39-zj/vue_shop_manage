@@ -113,12 +113,49 @@
       <el-col :span="14">
         <el-card shadow="hover" class="dataV-box">
           <div class="quick-nav">
+
             <div class="nav-box">
-              <div class="nav-title">快捷导航</div>
-              <div class="nav-item">1</div>
-              <div class="nav-item">2</div>
-              <div class="nav-item">3</div>
-              <div class="nav-item">4</div>
+              <div class="nav-title one">快捷导航</div>
+              <div class="nav-flex-one">
+                <div class="nav-item one">
+                  <div>
+                    <svg-icon icon-class='home' className="Icon home-icon" />
+                    <p class="nav-item-name">首页</p>
+                  </div>
+                </div>
+                <div class="nav-item two">
+                  <div>
+                    <svg-icon icon-class='user' className="Icon user-icon" />
+                    <p class="nav-item-name">用户</p>
+                  </div>
+                </div>
+                <div class="nav-item three">
+                  <div>
+                    <svg-icon icon-class='skill' className="Icon skill-icon" />
+                    <p class="nav-item-name">设置</p>
+                  </div>
+                </div>
+              </div>
+              <div class="nav-flex-two">
+                <div class="nav-item one">
+                  <div>
+                    <svg-icon icon-class='menu' className="Icon menu-icon" />
+                    <p class="nav-item-name">菜单</p>
+                  </div>
+                </div>
+                <div class="nav-item two">
+                  <div>
+                    <svg-icon icon-class='component' className="Icon component-icon" />
+                    <p class="nav-item-name">组件</p>
+                  </div>
+                </div>
+                <div class="nav-item three">
+                  <div>
+                    <svg-icon icon-class='chart' className="Icon chart-icon" />
+                    <p class="nav-item-name">图表</p>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="nav-chart">
               <dv-charts :option="option" class="dataV-contain" />
@@ -221,6 +258,13 @@
       initChart() {
         const myChart = echarts.init(document.getElementById('chart-contain'));
         const option = {
+          title: {
+            text: "年度追番",
+            textStyle: {
+              fontWeight:'normal',
+              fontSize: '18'
+            }
+          },
           tooltip: {
             trigger: 'axis',
             axisPointer: {
@@ -231,6 +275,7 @@
             }
           },
           toolbox: {
+            top: '5px',
             feature: {
               dataView: {
                 show: true,
@@ -249,7 +294,8 @@
             }
           },
           legend: {
-            data: ['蒸发量', '降水量', '平均温度']
+            data: ['新番', '旧番', '总追番量占比'],
+            top: '5px',
           },
           xAxis: [{
             type: 'category',
@@ -260,37 +306,37 @@
           }],
           yAxis: [{
               type: 'value',
-              name: '水量',
+              // name: '水量',
               min: 0,
               max: 250,
               interval: 50,
               axisLabel: {
-                formatter: '{value} ml'
+                formatter: '{value} '
               }
             },
             {
               type: 'value',
-              name: '温度',
+              // name: '温度',
               min: 0,
               max: 25,
               interval: 5,
               axisLabel: {
-                formatter: '{value} °C'
+                formatter: '{value} %'
               }
             }
           ],
           series: [{
-              name: '蒸发量',
+              name: '新番',
               type: 'bar',
               data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
             },
             {
-              name: '降水量',
+              name: '旧番',
               type: 'bar',
               data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
             },
             {
-              name: '平均温度',
+              name: '总追番量占比',
               type: 'line',
               yAxisIndex: 1,
               data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
@@ -646,6 +692,7 @@
     /deep/ .el-card__body {
       width: 100%;
       height: 100%;
+      padding: 0;
     }
   }
 
@@ -657,43 +704,117 @@
 
   .nav-box {
     width: 50%;
-    height: 90%;
+    height: 100%;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    // margin: 10px 20px;
 
     .nav-title {
       width: 100%;
       height: 10%;
-      box-sizing: border-box;
+      // box-sizing: border-box;
+      margin: 2% 20px;
     }
 
-    .nav-item {
-      width: 50%;
-      height: 45%;
-      box-sizing: border-box;
+    .nav-flex-one {
+      width: 100%;
+      height: 42%;
+      display: flex;
+
+      .nav-item {
+        flex: 1;
+        height: 100%;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 15px;
+
+        .Icon {
+          width: 2em;
+          height: 2em;
+        }
+
+        .home-icon {
+          fill: rgb(31, 218, 202);
+        }
+
+        .user-icon {
+          fill: rgba(77, 175, 27);
+        }
+
+        .skill-icon {
+          fill: rgb(191, 12, 44);
+        }
+      }
+
+      .one {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .two {
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        border-right: 1px solid rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .three {
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        border-right: 1px solid rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
     }
-  }
 
-  .nav-box div:nth-child(2) {
-    border: 1px solid rgba(0, 0, 0, 0.1);
-  }
+    .nav-flex-two {
+      width: 100%;
+      height: 42%;
+      display: flex;
 
-  .nav-box div:nth-child(3) {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
+      .nav-item {
+        flex: 1;
+        height: 100%;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 15px;
 
-  .nav-box div:nth-child(4) {
-    border-left: 1px solid rgba(0, 0, 0, 0.1);
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
+        .Icon {
+          width: 2em;
+          height: 2em;
+        }
 
-  .nav-box div:nth-child(5) {
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        .menu-icon {
+          fill: rgb(63, 178, 127);
+        }
+
+        .component-icon {
+          fill: rgb(225, 133, 37);
+        }
+
+        .chart-icon {
+          fill: rgb(0, 216, 255);
+        }
+      }
+
+      .one {
+        border-left: 1px solid rgba(0, 0, 0, 0.1);
+        border-right: 1px solid rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .two {
+        border-right: 1px solid rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .three {
+        border-right: 1px solid rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+    }
+
   }
 
 
@@ -704,7 +825,7 @@
   }
 
   .dataV-contain {
-    width: 95%;
+    width: 90%;
     height: 30vh;
   }
 
@@ -716,11 +837,12 @@
     /deep/ .el-card__body {
       width: 100%;
       height: 100%;
+      padding: 0;
     }
   }
 
   .chart-contain {
     width: 95%;
-    height: calc(100% - 50px);
+    height: 100%;
   }
 </style>
