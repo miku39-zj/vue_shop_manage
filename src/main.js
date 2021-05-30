@@ -64,15 +64,6 @@ Vue.prototype.dateFormat = function (row, column, cellValue, index) {
   return moment(cellValue).isValid() && cellValue != "0001-01-01T00:00:00" ? moment(cellValue).format('YYYY-MM-DD HH:mm:ss') : ""
 };
 
-// 配置请求根路径
-axios.defaults.baseURL = ''
-// 请求拦截器 对请求预处理
-axios.interceptors.request.use(config => {
-  config.headers.Authorization = window.sessionStorage.getItem('token')
-  return config
-})
-// 讲axios挂载到原型上
-Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
 

@@ -21,8 +21,6 @@ VueRouter.prototype.push = function push(location) {
 
 }
 
-
-// 通用页面, 这里的配置不需要权限
 export const constRouter = [{
     path: '/login',
     component: () => import('@/components/Login'),

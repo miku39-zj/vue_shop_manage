@@ -1,4 +1,3 @@
-
 /**
  * @description: 根据对象多个属性去重,并取出对应的属性 toRepeat([{a:1,b:2,c:3},{a:1,b:2,c:4},{a:2,b:3,c:4}],"a","b") => [{a:1,b:2},{a:2,b:3}]
  */
@@ -122,26 +121,26 @@ export function isEmpty(val) {
   let type = getType(val)
   let obj
   switch (type) {
-  case "String":
-    obj = !!Trim(val)
-    break
-  case "Number":
-    obj = !!val
-    break;
-  case "Array":
-    obj = !!val.length
-    break
-  case "Object":
-    obj = !!Object.keys(val).length //不考虑enumerable为false的key(内置key)
-    // !!Reflect.ownKeys(val).length  // 考虑所有key
-    break;
-  case "Map":
-  case "Set":
-    obj = !!val.size
-    break
-  default:
-    obj = false
-    break
+    case "String":
+      obj = !!Trim(val)
+      break
+    case "Number":
+      obj = !!val
+      break;
+    case "Array":
+      obj = !!val.length
+      break
+    case "Object":
+      obj = !!Object.keys(val).length //不考虑enumerable为false的key(内置key)
+      // !!Reflect.ownKeys(val).length  // 考虑所有key
+      break;
+    case "Map":
+    case "Set":
+      obj = !!val.size
+      break
+    default:
+      obj = false
+      break
   }
   return !obj
 }
@@ -278,7 +277,12 @@ import request from '@/utils/request'
  * @param {文件名称} fileName
  */
 export function downloadFile(url, fileName) {
-  request({ url: url, method: 'get', responseType: "blob" }).then(data => {
+  request({
+    url: url,
+    method: 'get',
+    responseType: "blob"
+  }).then(data => {
+    console.log(data,"data");
     let downloadElement = document.createElement("a");
     let href = window.URL.createObjectURL(data); // 创建下载的链接
     downloadElement.href = href;

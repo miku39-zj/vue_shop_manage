@@ -1,257 +1,204 @@
 <template>
-  <div class="login_container">
+  <div class="login_container"
+    :style="showMoon ? {['background-color']:'rgba(28, 34, 48, 0.8)'} : {['background-color']:'hsla(0, 0%, 100%, 0.5)'}">
     <div class="rightTop">
-      <svg-icon icon-class='cloud' className="cloud-icon" />
+      <svg-icon :icon-class="showMoon ? 'moontag' : 'suntag'" className="moon-icon" />
     </div>
-    <div class="login_box">
-      <!-- 头像区 -->
-      <!-- <div class="avatar_box">
-        A
-      </div> -->
-      <div class="login-box-title">
-        后台管理系统
+    <div class="toggle" :class="{'is-moon': showMoon}" @click.prevent="showValue">
+      <svg-icon icon-class='suntag' className="suntag-icon" />
+      <svg-icon icon-class='moontag' className="moontag-icon" />
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" class="wave" viewBox="0 0 1440 320">
+      <path fill="#0099ff" fill-opacity="1"
+        d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+      </path>
+    </svg>
+    <div class="user">
+      <div class="Icon">
+        <svg-icon icon-class='userfill' className="user-icon" />
       </div>
-      <!-- 登录表单  :model绑定数据-->
-      <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules" label-width="0px" class="login_form">
-        <el-form-item prop="username">
-          <el-input v-model="loginForm.username" placeholder="请输入用户名" size="medium">
-            <el-button slot="prepend" icon="el-icon-user"></el-button>
-          </el-input>
-        </el-form-item>
-        <el-form-item prop="password">
-          <el-input v-model="loginForm.password" placeholder="请输入密码" size="medium">
-            <el-button slot="prepend" icon="el-icon-key"></el-button>
-          </el-input>
-        </el-form-item>
-        <el-form-item class="btns">
-          <el-button class="MyLoginButton" style="width:100%" type="primary" @click="login" size="medium">立即登录
-          </el-button>
-        </el-form-item>
-        <el-row class="remenbBox">
-          <el-col :span="12">
-            <el-form-item>
-              <el-checkbox v-model="loginForm.remenbMe" style="color:#000">记住我</el-checkbox>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item :style="{ 'text-align': 'right' }">
-              <el-button type="text" size="small">
-                忘记密码？
-              </el-button>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <div class="divider">
-          <span class="text">其他登录</span>
-        </div>
-        <el-form-item :style="{ 'text-align': 'center' }">
-          <el-button class="iconBox" type="text" @click="otherLogin">
-            <svg-icon icon-class='github' className="myIcon github-icon" />
-          </el-button>
-          <el-button class="iconBox" type="text" @click="otherLogin">
-            <svg-icon icon-class='facebook' className="myIcon facebook-icon" />
-          </el-button>
-          <el-button class="iconBox" type="text" @click="otherLogin">
-            <svg-icon icon-class='twitter' className="myIcon twitter-icon" />
-          </el-button>
-          <el-button class="iconBox" type="text" @click="otherLogin">
-            <svg-icon icon-class='wechart' className="myIcon wechart-icon" />
-          </el-button>
-        </el-form-item>
-        <!-- <el-divider class="otherLogin">其它登录</el-divider> -->
-      </el-form>
+      <div class="head">account login</div>
     </div>
-    <otherLogin ref="otherLogin"></otherLogin>
+    <transition name="move" mode="out-in">
+      <SignIn ref="SignIn" v-if="isSignIn" @showSignUp="showSignUp"></SignIn>
+      <SignUp ref="SignUp" v-else @showSignIn="showSignIn"></SignUp>
+    </transition>
   </div>
 </template>
 
 <script>
+  import SignIn from "./LoginChild/SignIn"
+  import SignUp from "./LoginChild/SignUp"
   import otherLogin from "./LoginChild/otherLogin"
   export default {
     components: {
-      otherLogin
+      otherLogin,
+      SignUp,
+      SignIn
     },
     data() {
       return {
-        checked: false,
-        loginForm: {
-          username: 'admin',
-          password: '123456',
-          remenbMe: false
-        },
-        loginFormRules: {
-          username: [{
-              required: true,
-              message: '请输入登录名称',
-              trigger: 'blur'
-            },
-            {
-              min: 3,
-              max: 5,
-              message: '长度在 3 到 5 个字符',
-              trigger: 'blur'
-            },
-          ],
-          password: [{
-              required: true,
-              message: '请输入密码',
-              trigger: 'blur'
-            },
-            {
-              min: 6,
-              max: 15,
-              message: '长度在 6 到 15 个字符',
-              trigger: 'blur',
-            },
-          ],
-        },
+        isSignIn: true,
+        showMoon: false,
       }
     },
     methods: {
-
-      login() {
-        this.$refs.loginFormRef.validate(async (valid) => {
-          if (!valid) return
-          this.$router.push('/home')
-        })
+      showSignUp() {
+        this.isSignIn = !this.isSignIn
       },
-      otherLogin() {
-        this.$refs.otherLogin.dialogVisible = true
+      showSignIn() {
+        this.isSignIn = !this.isSignIn
       },
+      showValue() {
+        this.showMoon = !this.showMoon
+      }
     },
   }
 </script>
 
 <style lang="less" scoped>
-  .divider {
-    border-top: 0px solid rgba(0, 0, 0, .4);
-    box-sizing: border-box;
-    color: rgba(0, 0, 0, .5);
-    width: 100%;
-
-    .text {
-      width: 20%;
-      display: inline-block;
-      padding: 0 1em;
-      text-align: center;
-      transform: translate(0, 25%);
-    }
-
-  }
-
-
-  .divider::before {
-    content: "";
-    display: inline-block;
-    border-bottom: 0;
-    border-top: 1px solid transparent;
-    border-top-color: inherit;
-    width: 35%;
-  }
-
-  .divider::after {
-    border-bottom: 0;
-    display: inline-block;
-    border-top: 1px solid transparent;
-    border-top-color: inherit;
-    content: "";
-    width: 35%;
-  }
-
   .login_container {
     // background-color: #000;
-    background-image: url(../assets/img/4.jpg);
-    background-repeat: no-repeat;
+    // background-image: url(../assets/img/222.jpg);
+    // background-repeat: no-repeat;
     // clip-path: polygon(0% 0%, 84% 0, 100% 50%, 83% 100%, 0% 100%);
-    background-size: cover;
+    // background-size: cover;
+    // background-color: rgba(28, 34, 48, 0.8);
+    // background-color: #1c2230;
+    // background: hsla(0, 0%, 100%, 0.1);
     width: 100%;
     height: 100%;
 
+    .wave {
+      position: absolute;
+      bottom: 0;
+      z-index: -1;
+      fill: #0099ff;
+    }
+  }
 
+  .login_container::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 50%;
+    height: 50%;
+    z-index: -1;
+    background-color: #0099ff;
+    clip-path: ellipse(46% 60% at 0% 0%);
+  }
+
+  .toggle {
+    position: relative;
+    display: flex;
+    height: 26px;
+    width: 50px;
+    background-color: #151515;
+    cursor: pointer;
+    border-radius: 30px;
+    box-sizing: border-box;
+    padding: 0 6px;
+    margin: 0 0 0 auto;
+    top: 10px;
+    right: 30px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .toggle::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background-color: #fff;
+    z-index: 1;
+    top: 4px;
+    border-radius: 50%;
+    transition: all .3s;
+  }
+
+  .is-moon::after {
+    transform: translateX(calc(100% + 2px));
   }
 
   .rightTop {
     float: right;
-    margin: 15px 30px 0 0;
+    margin: 0 30px 0 0;
 
-    .cloud-icon {
-      width: 3em;
-      height: 3em;
+    .moon-icon {
+      width: 4em;
+      height: 4em;
     }
   }
 
-  .login-box-title {
-    line-height: 50px;
-    font-size: 20px;
-    color: #000;
-    text-align: center;
-    border-bottom: 1px solid #ffffff;
-  }
 
 
-
-  .login_box {
-    width: 400px;
-    height: 400px;
-    // background-color: #fff;
-    background: hsla(0, 0%, 100%, .6);
-    border-radius: 3px;
+  .user {
     position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    top: 20rem;
+    left: 8rem;
+    z-index: -1;
 
-    .myIcon {
-      width: 1.8em;
-      height: 1.8em;
+    .Icon {
+      text-align: center;
+      margin-bottom: 2px;
+
     }
 
-    .iconBox {
-      margin: 0.5em 1em;
+    .user-icon {
+      fill: #0099ff;
+      font-size: 5rem;
     }
 
-    .avatar_box {
-      // height: 100px;
-      // width: 100px;
-      // // border: 1px solid #eee;
-      // border-radius: 50%;
-      // padding: 10px;
-      // position: absolute;
-      // left: 50%;
-      // transform: translate(-50%, -100%);
-      // font-size: 100px;
-      // color: red;
-      // // margin: 30px 800px;
-      // text-align: center;
-      // text-shadow: 0 0 4px white, 0 -5px 4px #ff3, 2px -10px 6px #fd3, -2px -15px 11px #f80, 2px -25px 18px #f20;
+    .head {
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      user-select: none;
+      text-shadow: 1px 1px 1px rgba(16, 16, 16, 0.1), 1px 2px 1px rgba(16, 16, 16, 0.1), 1px 3px 1px rgba(16, 16, 16, 0.1), 1px 4px 1px rgba(16, 16, 16, 0.1), 1px 5px 1px rgba(16, 16, 16, 0.1), 1px 6px 1px rgba(16, 16, 16, 0.1), 1px 7px 1px rgba(16, 16, 16, 0.1), 1px 8px 1px rgba(16, 16, 16, 0.1);
     }
   }
 
 
-  .login_form {
-    // position: relative;
-    // bottom: 20px;
-    margin-top: 35px;
+
+  .avtar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    padding: 0 20px;
-    box-sizing: border-box;
-
-    .btns {
-      margin-bottom: 6px;
-    }
-
-    .remenbBox {
-      /deep/.el-form-item {
-        margin-bottom: 0px;
-      }
-    }
+    user-select: none;
   }
 
-  .otherLogin {
-    background-color: hsla(0, 0%, 100%, .3);
+  .avtar .pic {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    border-radius: 50%;
+    // border: 1px solid #3399ff;
+  }
 
-    /deep/.el-divider__text {
-      background-color: hsla(0, 0%, 100%, .3)
-    }
+  .avtar .pic img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .move-enter,
+  .move-leave-to {
+    // transform: scale(0.5);
+    opacity: 0;
+  }
+
+  .move-enter-to,
+  .move-leave {
+    // transform: scale(1);
+    opacity: 1;
+  }
+
+  .move-enter-active,
+  .move-leave-active {
+    transition: opacity .5s;
   }
 </style>
