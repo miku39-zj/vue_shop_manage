@@ -1,6 +1,9 @@
 <!--
  * @Description: 
 -->
+<!--
+ * @Description: 
+-->
 
 <template>
   <div>
@@ -22,7 +25,7 @@
     name: 'markdown',
     data() {
       return {
-        value: '<h1 style="color:rgb(100, 213, 114)">Hello 泡泡茶壶</h1>',
+        value: '<h1 style="color:#1A86EE">Hello 泡泡茶壶</h1>',
       }
     },
     components: {
