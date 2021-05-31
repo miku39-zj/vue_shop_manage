@@ -29,10 +29,30 @@ export const constRouter = [{
   {
     path: '/',
     component: Home,
-    redirect: '/home',
+    redirect: '/welcome',
     hidden: true,
   },
-  {
+  // {
+  //   path: '/',
+  //   component: Home,
+  //   name: 'home',
+  //   meta: {
+  //     title: "首页", //导航菜单项标题
+  //     icon: 'el-icon-s-home' //导航菜单图标
+  //   },
+  //   children: [{
+  //     path: '/welcome',
+  //     component: () => import('@/components/Welcome.vue'),
+  //     name: 'welcome',
+  //     meta: {
+  //       title: "欢迎页",
+  //       icon: 'el-icon-s-home',
+  //     }
+  //   }]
+  // }
+]
+
+export const dynamicRoutes = [{
     path: '/',
     component: Home,
     name: 'home',
@@ -41,7 +61,7 @@ export const constRouter = [{
       icon: 'el-icon-s-home' //导航菜单图标
     },
     children: [{
-      path: '/home',
+      path: '/welcome',
       component: () => import('@/components/Welcome.vue'),
       name: 'welcome',
       meta: {
@@ -49,20 +69,18 @@ export const constRouter = [{
         icon: 'el-icon-s-home',
       }
     }]
-  }
-]
-
-export const dynamicRoutes = [{
+  },
+  {
     path: '/',
     component: Home,
-    name: "User",
+    name: "user",
     meta: {
       title: "用户列表",
       icon: 'el-icon-user',
       hidden: false
     },
     children: [{
-        path: '/User',
+        path: '/userlist',
         component: () => import('@/views/User/userList.vue'),
         name: 'userlist',
         meta: {
@@ -72,9 +90,9 @@ export const dynamicRoutes = [{
         }
       },
       {
-        path: '/Skill',
+        path: '/skilllist',
         component: () => import('@/views/User/skillList.vue'),
-        name: 'userSkill',
+        name: 'skilllist',
         meta: {
           title: "技能列表",
           icon: 'el-icon-scissors',

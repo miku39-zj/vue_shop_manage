@@ -11,8 +11,8 @@
           </div>
           <div class="siderMain">
             <el-menu class="siderMenu" background-color="#333744" text-color="#ffffff" active-text-color="#ffffff"
-              :unique-opened="false" :collapse="isCollapse" :collapse-transition="false" router
-              :default-active="activeMenu" mode="vertical">
+              unique-opened :collapse="isCollapse" :collapse-transition="false" router :default-active="activeMenu"
+              mode="vertical">
               <MenuItem v-for="route in common_routes" :key="route.name" :item="route" :base-path="route.path">
               </MenuItem>
             </el-menu>
@@ -74,7 +74,7 @@
       TagsViews
     },
     computed: {
-      ...mapGetters(["common_routes","tagList"]),
+      ...mapGetters(["common_routes", "tagList"]),
       activeMenu() {
         const route = this.$route;
         const {
@@ -133,6 +133,7 @@
   .home-sider {
     background-image: linear-gradient(#001529, #001529);
     height: 100%;
+    transition: width .3s;
 
     .siderBox {
       width: 100%;
@@ -166,8 +167,6 @@
 
     .siderMenu {
       width: 100%;
-
-
     }
   }
 

@@ -82,9 +82,10 @@
         this.$emit("showSignIn")
       },
       login() {
-        this.$message.success("注册成功！")
+
         this.$refs.loginFormRef.validate(async (valid) => {
           if (!valid) return
+          this.$message.success("注册成功！")
           this.$router.push('/home')
         })
       },
