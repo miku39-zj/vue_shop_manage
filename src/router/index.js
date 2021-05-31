@@ -2,10 +2,6 @@
  * @Description: 
  * @Date: 2021-05-07 19:32:33
  */
-/*
- * @Description: 
- * @Date: 2021-05-07 19:32:33
- */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -32,6 +28,7 @@ export const constRouter = [{
     redirect: '/welcome',
     hidden: true,
   },
+  //#region 
   // {
   //   path: '/',
   //   component: Home,
@@ -50,6 +47,7 @@ export const constRouter = [{
   //     }
   //   }]
   // }
+  //#endregion
 ]
 
 export const dynamicRoutes = [{
@@ -57,8 +55,8 @@ export const dynamicRoutes = [{
     component: Home,
     name: 'home',
     meta: {
-      title: "首页", //导航菜单项标题
-      icon: 'el-icon-s-home' //导航菜单图标
+      title: "首页",
+      icon: 'el-icon-s-home'
     },
     children: [{
       path: '/welcome',
@@ -221,6 +219,68 @@ export const dynamicRoutes = [{
         meta: {
           title: "文件下载",
           icon: 'el-icon-download',
+          hidden: false,
+        }
+      },
+    ]
+  },
+  {
+    path: '/',
+    component: Home,
+    name: "chart",
+    meta: {
+      title: "图表",
+      icon: 'el-icon-s-data',
+      hidden: false
+    },
+    children: [{
+        path: '/lineChart',
+        component: () => import('@/views/Chart/LineChart.vue'),
+        name: 'lineChart',
+        meta: {
+          title: "折线图",
+          icon: 'el-icon-ice-cream-square',
+          hidden: false,
+        }
+      },
+      {
+        path: '/pieChart',
+        component: () => import('@/views/Chart/PieChart.vue'),
+        name: 'pieChart',
+        meta: {
+          title: "饼图",
+          icon: 'el-icon-lollipop',
+          hidden: false,
+        }
+      },
+    ]
+  },
+  {
+    path: '/',
+    component: Home,
+    name: "system",
+    meta: {
+      title: "系统管理",
+      icon: 'el-icon-setting',
+      hidden: false
+    },
+    children: [{
+        path: '/personalManage',
+        component: () => import('@/views/System/PersonalManage.vue'),
+        name: 'personalManage',
+        meta: {
+          title: "个人管理",
+          icon: 'el-icon-s-custom',
+          hidden: false,
+        }
+      },
+      {
+        path: '/accountManage',
+        component: () => import('@/views/System/AccountManage.vue'),
+        name: 'accountManage',
+        meta: {
+          title: "账号管理",
+          icon: 'el-icon-s-opportunity',
           hidden: false,
         }
       },

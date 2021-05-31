@@ -75,10 +75,11 @@ export function throttle(func, waite) {
  * @description: 根据节点展开/关闭所有节点 （适用el-tree
  */
 export function closeAllnode(context, root, isExpaned) {
+  console.log(isExpaned, "isExpaned");
   let helper = root => {
-    if (root.expanded) {
-      context.$set(root, 'expanded', isExpaned)
-    }
+    // if (root.expanded) {
+    context.$set(root, 'expanded', isExpaned)
+    // }
 
     if (root.childNodes.length > 0) {
       for (let i = 0; i < root.childNodes.length; i++) {
@@ -282,7 +283,7 @@ export function downloadFile(url, fileName) {
     method: 'get',
     responseType: "blob"
   }).then(data => {
-    console.log(data,"data");
+    console.log(data, "data");
     let downloadElement = document.createElement("a");
     let href = window.URL.createObjectURL(data); // 创建下载的链接
     downloadElement.href = href;

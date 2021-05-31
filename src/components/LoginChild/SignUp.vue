@@ -10,7 +10,6 @@
     <div class="login-box-title">
       后台管理系统
     </div>
-    <!-- 登录表单  :model绑定数据-->
     <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules" label-width="0px" class="login_form">
       <el-form-item prop="username">
         <el-input v-model="loginForm.username" placeholder="请输入用户名" size="medium">
@@ -86,7 +85,7 @@
         this.$refs.loginFormRef.validate(async (valid) => {
           if (!valid) return
           this.$message.success("注册成功！")
-          this.$router.push('/home')
+          this.$router.push('/welcome')
         })
       },
       otherLogin() {
@@ -102,11 +101,11 @@
 
 <style lang="less" scoped>
   /deep/ .el-input__inner {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.7);
   }
 
   /deep/.el-input-group__prepend {
-    background-color: rgba(245, 247, 250, 0.8);
+    background-color: rgba(245, 247, 250, 0.7);
   }
 
   .login_box {

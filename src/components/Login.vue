@@ -1,6 +1,6 @@
 <template>
   <div class="login_container"
-    :style="showMoon ? {['background-color']:'rgba(28, 34, 48, 0.8)'} : {['background-color']:'hsla(0, 0%, 100%, 0.5)'}">
+    :style="showMoon ? {['background-color']:'rgba(28, 34, 48, 0.5)'} : {['background-color']:'hsla(0, 0%, 100%, 0.5)'}">
     <div class="rightTop">
       <svg-icon :icon-class="showMoon ? 'moontag' : 'suntag'" className="moon-icon" />
     </div>
@@ -156,33 +156,6 @@
       user-select: none;
       text-shadow: 1px 1px 1px rgba(16, 16, 16, 0.1), 1px 2px 1px rgba(16, 16, 16, 0.1), 1px 3px 1px rgba(16, 16, 16, 0.1), 1px 4px 1px rgba(16, 16, 16, 0.1), 1px 5px 1px rgba(16, 16, 16, 0.1), 1px 6px 1px rgba(16, 16, 16, 0.1), 1px 7px 1px rgba(16, 16, 16, 0.1), 1px 8px 1px rgba(16, 16, 16, 0.1);
     }
-  }
-
-
-
-  .avtar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    user-select: none;
-  }
-
-  .avtar .pic {
-    position: relative;
-    width: 80px;
-    height: 80px;
-    overflow: hidden;
-    border-radius: 50%;
-    // border: 1px solid #3399ff;
-  }
-
-  .avtar .pic img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
   }
 
   .move-enter,

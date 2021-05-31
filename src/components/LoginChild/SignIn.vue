@@ -1,7 +1,6 @@
 <!--
  * @Description: 
 -->
-
 <template>
   <div>
     <div class="login_box" v-if="isSignIn">
@@ -121,7 +120,7 @@
       login() {
         this.$refs.loginFormRef.validate(async (valid) => {
           if (!valid) return
-          this.$router.push('/home')
+          this.$router.push('/welcome')
         })
       },
       otherLogin() {
@@ -134,11 +133,11 @@
 
 <style lang="less" scoped>
   /deep/ .el-input__inner {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.7);
   }
 
   /deep/.el-input-group__prepend {
-    background-color: rgba(245, 247, 250, 0.8);
+    background-color: rgba(245, 247, 250, 0.7);
   }
 
   .login_box {

@@ -564,10 +564,11 @@
 
   .user-info-name {
     .rain-icon {
-      margin-left: 250px;
-      width: 1em;
-      height: 1em;
+      // margin-left: 250px;
+      width: 1.5em;
+      height: 1.5em;
       vertical-align: middle;
+      fill:royalblue;
     }
   }
 
