@@ -135,7 +135,7 @@
   }
 
   .headPortrait {
-    background-image: url('../../assets/img/333.jpg');
+    background-image: url('../../assets/img/37.png');
     width: 40px;
     height: 40px;
     background-repeat: no-repeat;

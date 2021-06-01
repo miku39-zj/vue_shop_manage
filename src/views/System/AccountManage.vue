@@ -41,7 +41,7 @@
           </el-form>
         </el-card>
         <el-card class="table-card">
-          <el-table :data="tableData" style="width: 100%" size="medium" border stripe>
+          <el-table :data="tableData" style="width: 100%" size="big" border stripe fit>
             <el-table-column type="index" width="50">
             </el-table-column>
             <el-table-column prop="user" label="用户名" width="180">

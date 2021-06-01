@@ -73,7 +73,7 @@
             <div class="save-set">
               <div>
                 <div class="set-title">密保手机</div>
-                <div class="set-foot">已绑定手机：：3939****9 </div>
+                <div class="set-foot">已绑定手机:3939****9 </div>
               </div>
               <div class="set-edit">修改</div>
             </div>
@@ -82,7 +82,30 @@
         <el-tab-pane label="账号绑定">
           <el-card>
             <div slot="header" class="account-set-head">账号绑定</div>
-            <h1>无</h1>
+            <div class="accout-set">
+              <div class="accout-set-icon">
+                <svg-icon icon-class='github' className="accout-icon" />
+              </div>
+              <div class="accout-set-contain">
+                <div class="accout-set-contain-left">
+                  <div class="set-title">绑定github</div>
+                  <div class="set-foot">还未绑定github </div>
+                </div>
+                <div class="accout-set-contain-right">绑定</div>
+              </div>
+            </div>
+            <div class="accout-set">
+              <div class="accout-set-icon">
+                <svg-icon icon-class='wechart' className="accout-icon" />
+              </div>
+              <div class="accout-set-contain">
+                <div class="accout-set-contain-left">
+                  <div class="set-title">绑定微信</div>
+                  <div class="set-foot">还未绑定微信 </div>
+                </div>
+                <div class="accout-set-contain-right">绑定</div>
+              </div>
+            </div>
           </el-card>
         </el-tab-pane>
         <el-tab-pane label="消息通知">
@@ -165,4 +188,31 @@
     color: royalblue;
   }
 
+  .accout-set {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .accout-set-icon {
+    padding: 0.5em;
+    .accout-icon {
+      width: 2em;
+      height: 2em;
+      fill: rgb(32, 218, 131)
+    }
+  }
+  .accout-set-contain {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+  }
+
+  .accout-set-contain-right {
+    font-size: 15px;
+    color: royalblue;
+  }
 </style>
