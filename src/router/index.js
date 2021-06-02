@@ -285,6 +285,27 @@ export const dynamicRoutes = [{
         }
       },
     ]
+  },
+  {
+    path: '/',
+    component: Home,
+    name: "tabs",
+    meta: {
+      title: "tab选项卡",
+      icon: 'el-icon-star-off',
+      hidden: false
+    },
+    children: [{
+        path: '/tab',
+        component: () => import('@/views/Tabs/tab.vue'),
+        name: 'tab',
+        meta: {
+          title: "tab选项卡",
+          icon: 'el-icon-star-off',
+          hidden: false,
+        }
+      },
+    ]
   }
 ]
 

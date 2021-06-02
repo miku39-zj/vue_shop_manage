@@ -41,6 +41,23 @@
           </el-form>
         </el-card>
         <el-card class="table-card">
+          <!-- <table border="1" class="table">
+            <caption class="table-title">用户列表</caption>
+            <thead class="table-head">
+              <tr>
+                <th v-for="item in tableHead" :key="item">{{item}}</th>
+              </tr>
+            </thead>
+            <tbody class="table-body">
+              <tr v-for="item in tableData" :key="item.id">
+                <td>{{item.id}}</td>
+                <td>{{item.user}}</td>
+                <td>{{item.part}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.desc}}</td>
+              </tr>
+            </tbody>
+          </table> -->
           <el-table :data="tableData" style="width: 100%" size="big" border stripe fit>
             <el-table-column type="index" width="50">
             </el-table-column>
@@ -66,51 +83,60 @@
   export default {
     data() {
       return {
+        tableHead: ["序号", "用户名", "部门", "邮箱", "描述"],
         form: {
 
         },
         tableData: [{
+            id: 1,
             user: '路飞',
             part: '海贼部门',
             email: '5566@one.com',
             desc: "获取one piece"
           }, {
+            id: 2,
             user: '黄猿',
             part: '海军部门',
             email: 'yuanyuan@one.com',
             desc: "莫西莫西"
           },
           {
+            id: 3,
             user: '索隆',
             part: '海贼部门',
             email: '111111111@one.com',
             desc: "绿藻头, 路痴"
           },
           {
+            id: 4,
             user: '纳兹',
             part: '妖精的尾巴部门',
             email: 'firefore@one.com',
             desc: "晕交通工具"
           },
           {
+            id: 5,
             user: 'mio',
             part: '轻音部门',
             email: 'mmiomio@one.com',
             desc: "蓝白碗"
           },
           {
+            id: 6,
             user: '鸣人',
             part: '木叶村部门',
             email: 'nbnbnb@one.com',
             desc: "嘴遁"
           },
           {
+            id: 7,
             user: '格雷',
             part: '妖精的尾巴部门',
             email: 'lllllll@one.com',
             desc: "暴露狂"
           },
           {
+            id: 8,
             user: 'yui',
             part: '轻音分部',
             email: 'daidaidai@one.com',
@@ -212,5 +238,46 @@
   .table-card {
     margin-top: 15px;
     height: calc(90% - 15px);
+  }
+
+  .table-title {
+    text-align: left;
+    font-size: 20px;
+    font-weight: bolder;
+  }
+
+  .table {
+    border-collapse: collapse;
+    border: solid 1px #ddd;
+
+  }
+
+  .table-title{
+    margin-bottom: 10px;
+  }
+
+  .table-head {
+    tr {
+      height: 40px;
+    }
+  }
+  .table-body {
+    border-collapse: collapse;
+    border: solid 1px #ddd;
+
+    tr {
+      // width: 120px;
+      height: 50px;
+      text-align: center;
+      // border: solid 1px #ddd;
+    }
+
+    tr td:first-child {
+      width: 50px;
+    }
+
+    tr td:nth-child(n+2) {
+      width: 150px;
+    }
   }
 </style>

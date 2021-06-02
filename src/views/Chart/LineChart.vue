@@ -5,7 +5,7 @@
   <section class="chart">
     <el-card class="chart-box">
       <div slot="header" class="chart-title">
-        <div>echarts使用</div>
+        <div>echarts使用:折线图</div>
       </div>
       <el-row class="line-chart" :gutter="20">
         <el-col :span="12" class="line-chart-left">
