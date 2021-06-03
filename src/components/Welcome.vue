@@ -9,21 +9,22 @@
             <div class="user-info-cont">
               <div class="user-info-name">
                 admin
-                <svg-icon icon-class='rain' className="rain-icon" />
+                <span style="font-size:14px">早上好,admin,祝你新的一天工作愉快</span>
+                <!-- <svg-icon icon-class='rain' className="rain-icon" /> -->
               </div>
               <div class="use-info-titel">
-                <p>早上好,admin,祝你新的一天工作愉快</p>
-                <p>今天小雨转阴天,21~27°,天凉,注意加衣</p>
+
+                <iframe allowtransparency="true" frameborder="0" width="410" height="98" scrolling="no"
+                  src="//tianqi.2345.com/plugin/widget/index.htm?s=1&z=1&t=1&v=0&d=2&bd=0&k=&f=&ltf=009944&htf=cc0000&q=1&e=1&a=1&c=54511&w=410&h=98&align=center"></iframe>
+
+                <!-- <p>今天小雨转阴天,21~27°,天凉,注意加衣</p> -->
               </div>
               <!-- <div class="user-info-list">
-                上次登录时间：
-                <span>2020-10-01</span>
-              </div>
-              <div class="user-info-list">
-                上次登录地点：
-                <span>伟大航路</span>
-              </div> -->
-            </div>
+                
+                <span>上次登录时间:2020-10-01</span>
+                <!-- <span>上次登录地点:伟大航路</span> -->
+            </div> -->
+          </div>
           </div>
         </el-card>
       </el-col>
@@ -261,7 +262,7 @@
           title: {
             text: "年度追番",
             textStyle: {
-              fontWeight:'normal',
+              fontWeight: 'normal',
               fontSize: '18'
             }
           },
@@ -497,6 +498,11 @@
     border: 1px solid rgba(0, 0, 0, 0.1);
     align-items: center;
     height: 100px;
+    cursor: pointer;
+  }
+
+  .tip-content:hover {
+    transform: scale(1.02);
   }
 
   .grid-cont-right {
@@ -553,6 +559,14 @@
     // margin-bottom: 20px;
   }
 
+  .user-info-list {
+    // display: flex;
+    position: absolute;
+    font-size: 14px;
+    bottom: 1em;
+    left: 2em;
+  }
+
 
 
   .user-avator {
@@ -568,7 +582,7 @@
       width: 1.5em;
       height: 1.5em;
       vertical-align: middle;
-      fill:royalblue;
+      fill: royalblue;
     }
   }
 
@@ -731,7 +745,7 @@
         justify-content: center;
         align-items: center;
         font-size: 15px;
-
+        cursor: pointer;
         .Icon {
           width: 2em;
           height: 2em;
@@ -750,6 +764,7 @@
         }
       }
 
+
       .one {
         border: 1px solid rgba(0, 0, 0, 0.1);
       }
@@ -767,6 +782,10 @@
       }
     }
 
+    .nav-item:hover {
+      transform: scale(1.01);
+    }
+
     .nav-flex-two {
       width: 100%;
       height: 42%;
@@ -780,7 +799,7 @@
         justify-content: center;
         align-items: center;
         font-size: 15px;
-
+        cursor: pointer;
         .Icon {
           width: 2em;
           height: 2em;

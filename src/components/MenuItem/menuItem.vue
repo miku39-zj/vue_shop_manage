@@ -1,3 +1,6 @@
+<!--
+ * @Description: 
+-->
 <template>
   <div v-if="!item.hidden">
     <template v-if="checkOneChild(item.children,item)">
@@ -55,7 +58,7 @@
             return true
           }
         })
-        console.log(showingChildren, "showingChildren");
+        // console.log(showingChildren, "showingChildren");
         // 当只有一个子路由,子路由默认展示
         if (showingChildren.length === 1) {
           return true
@@ -67,7 +70,7 @@
             // path: '',
             noShowingChildren: true
           }
-          console.log(this.onlyOneChild, "this.onlyOneChild");
+          // console.log(this.onlyOneChild, "this.onlyOneChild");
           return true
         }
         return false

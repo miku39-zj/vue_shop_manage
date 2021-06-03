@@ -50,7 +50,7 @@
     methods: {
       //退出登录
       handleCommand(command) {
-        console.log(command,"command");
+        // console.log(command,"command");
         if (command == 'loginout') {
           this.$router.push('/login');
         }

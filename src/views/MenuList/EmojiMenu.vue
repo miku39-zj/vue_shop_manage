@@ -5,7 +5,7 @@
   <section>
     <el-card class="emoji-box">
       <div slot="header" class="emoji-title">
-        <div>emoji表情使用示例</div>
+        <div>emoji表情使用示例,点击复制</div>
       </div>
       <el-input v-model="input" placeholder="请输入内容" clearable>
         <template slot="append" class="append">

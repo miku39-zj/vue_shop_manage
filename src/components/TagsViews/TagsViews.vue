@@ -14,7 +14,7 @@
     </ul>
     <div class="tags-close-box">
       <el-dropdown @command="handleTags">
-        <el-button size="mini" class="MyLoginButton">
+        <el-button size="mini" type="primary">
           标签选项
           <i class="el-icon-arrow-down el-icon--right"></i>
         </el-button>

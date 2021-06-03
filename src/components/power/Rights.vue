@@ -1,3 +1,6 @@
+<!--
+ * @Description: 
+-->
 <template>
   <div>
     <!-- 面包屑导航区 -->
@@ -18,7 +21,6 @@
                 <template slot-scope="scope">
                     <el-tag v-if="scope.row.level === '0'">一级</el-tag>
                     <el-tag type="success" v-else-if="scope.row.level === '1'">二级</el-tag>
-                    <el-tag type="warning" v-else="scope.row.level === '2'">三级</el-tag>
                 </template>
             </el-table-column>
         </el-table>
@@ -44,7 +46,7 @@ export default {
                 return this.$message.error('获取权限列表失败');
             }
             this.rightsList = res.data
-            console.log(this.rightsList)
+            // console.log(this.rightsList)
         }
     }
 }
