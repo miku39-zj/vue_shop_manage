@@ -4,11 +4,11 @@
 
 登录界面：
 
-![image-20210604191801625](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210604191801625.png)
+![image-20210604191801625](.\img\image-20210604191801625.png)
 
 首页：
 
-![image-20210604191855837](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20210604191855837.png)
+![image-20210604191855837](.\img\image-20210604191855837.png)
 
 ## Project setup
 ```
