@@ -1,6 +1,6 @@
 <template>
   <div class="login_container"
-    :style="showMoon ? {['background-color']:'rgba(28, 34, 48, 0.5)'} : {['background-color']:'hsla(0, 0%, 100%, 0.5)'}">
+    :style="showMoon ? {['background-color']:'rgba(3, 11, 29, 0.6)'} : {['background-color']:'hsla(0, 0%, 100%, 0.5)'}">
     <div class="rightTop">
       <svg-icon :icon-class="showMoon ? 'moontag' : 'suntag'" className="moon-icon" />
     </div>
@@ -63,7 +63,7 @@
     // background-repeat: no-repeat;
     // clip-path: polygon(0% 0%, 84% 0, 100% 50%, 83% 100%, 0% 100%);
     // background-size: cover;
-    // background-color: rgba(28, 34, 48, 0.8);
+    background-color: rgba(3, 11, 29, 0.8);
     // background-color: #1c2230;
     // background: hsla(0, 0%, 100%, 0.1);
     width: 100%;

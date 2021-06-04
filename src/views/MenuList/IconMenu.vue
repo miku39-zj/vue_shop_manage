@@ -1,6 +1,9 @@
 <!--
  * @Description: 
 -->
+<!--
+ * @Description: 
+-->
 <template>
   <section>
     <el-card class="icon-box">
@@ -38,7 +41,7 @@
           "fullscreen", "gavel", "github", "home", "layout", "menu", "msg", "operate", "paste", "purchase", "rain",
           "search", "setup", "skill", "todolist", "twitter", "user", "view", "wechart"
         ],
-        iconTip: x =>  `<svg-icon :icon-class="${x}"  />`
+        iconTip: x =>  `<svg-icon icon-class="${x}"  />`
       }
     },
     methods: {

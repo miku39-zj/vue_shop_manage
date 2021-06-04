@@ -1,3 +1,6 @@
+<!--
+ * @Description: 
+-->
 <template>
   <section>
     <el-card class="box-card">
@@ -5,7 +8,7 @@
         <span>弹框示例</span>
         <el-button style=" margin: 3px 50px" type="primary" size="medium" @click="layerOut">点击弹出</el-button>
       </div>
-      <div>使用了vue-layer组件,访问<a href="https://layer.zuoyanit.com/">layer.zuoyanit.com</a>/</div>
+      <div>使用了vue-layer组件,访问<a href="https://layer.zuoyanit.com/" target="_blank">layer.zuoyanit.com</a>/</div>
     </el-card>
   </section>
 </template>
