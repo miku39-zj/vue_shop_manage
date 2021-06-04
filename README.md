@@ -1,4 +1,4 @@
-# vue_shop：使用vue+element ui + vuex + vue-router
+# vue_shop：项目使用vue+element ui + vuex + vue-router
 
 因暂时没服务器，只能用截屏替代：
 
