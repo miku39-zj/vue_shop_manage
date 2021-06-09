@@ -36,16 +36,19 @@
   export default {
     data() {
       return {
-        input:"",
+        input: "",
         iconList: ["backstage", "chart", "chase", "cloud", "component", "copy", "delete", "edit", "facebook", "fold",
           "fullscreen", "gavel", "github", "home", "layout", "menu", "msg", "operate", "paste", "purchase", "rain",
           "search", "setup", "skill", "todolist", "twitter", "user", "view", "wechart"
         ],
-        iconTip: x =>  `<svg-icon icon-class="${x}"  />`
+        iconTip: x => `<svg-icon icon-class="${x}"  />`
       }
     },
     methods: {
       copyicon() {
+        // const f = require("@/icons/svg/add.svg")
+        
+        // console.log(icons, "icons");
         let _this = this
         let clipboard = new this.clipboard('.copy-btn');
         clipboard.on('success', function (e) {
@@ -60,6 +63,13 @@
       iconClick(val) {
         this.input = val
       },
+    },
+    mounted(){
+      const icons = require
+          .context("@/icons/svg", false, /\.svg$/)
+          .keys()
+          .map(name => name.replace(/^\.\/([\w-]+)\.svg/, "$1"));
+      this.iconList = icons;
     }
 
   }
@@ -86,7 +96,7 @@
     cursor: pointer;
 
     span {
-      border: 1px rgba(50, 38, 228,0.4) solid;
+      border: 1px rgba(50, 38, 228, 0.4) solid;
       padding: 10px;
       border-radius: 5px;
     }
