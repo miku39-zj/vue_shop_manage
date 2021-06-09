@@ -77,9 +77,6 @@
     data() {
       return {
         isSignIn: true,
-        isSignUp: false,
-
-        checked: false,
         loginForm: {
           username: 'admin',
           password: '123456',

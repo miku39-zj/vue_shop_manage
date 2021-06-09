@@ -42,7 +42,6 @@
     data() {
       return {
         showMoon: false,
-        checked: false,
         loginForm: {
           username: '',
           password: '',
@@ -91,10 +90,6 @@
       otherLogin() {
         this.$refs.otherLogin.dialogVisible = true
       },
-
-      showValue() {
-        this.showMoon = !this.showMoon
-      }
     },
   }
 </script>
