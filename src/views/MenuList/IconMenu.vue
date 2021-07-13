@@ -47,7 +47,7 @@
     methods: {
       copyicon() {
         // const f = require("@/icons/svg/add.svg")
-        
+
         // console.log(icons, "icons");
         let _this = this
         let clipboard = new this.clipboard('.copy-btn');
@@ -64,11 +64,11 @@
         this.input = val
       },
     },
-    mounted(){
+    mounted() {
       const icons = require
-          .context("@/icons/svg", false, /\.svg$/)
-          .keys()
-          .map(name => name.replace(/^\.\/([\w-]+)\.svg/, "$1"));
+        .context("@/icons/svg", false, /\.svg$/)
+        .keys()
+        .map(name => name.replace(/^\.\/([\w-]+)\.svg/, "$1"));
       this.iconList = icons;
     }
 
